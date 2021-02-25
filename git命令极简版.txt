@@ -1,582 +1,557 @@
-//1 ��������
-�鿴git�汾:
-git --version   //Ҳ���������鿴ϵͳ��û�а�װgit
+///1 基础配置
+查看git版本:
+git --version   //也可以用来查看系统有没有安装git
 
-git�ͻ��ˡ����ӡ�GitHub��
-git config --global user.name  "name"             //���GitHub��½��
-git config --global user.email "~~~~~~~~~@qq.com" //���GitHubע������
-git config --global --list //�鿴�˻���Ϣ
-ssh-keygen -t rsa    //������Կ��ע�⿴������Ϣ����һ���ļ��� ���湫Կ��˽Կ��
-                       ��ȥ����ļ��У���.pub��β����Կ�������Կ�ǹ�Կ�������ⲿ��֤������һ��˽Կ��˽Կ���棩
-                       ���������ƹ�Կ��>��¼Github��վ��>������Ͻǵ�ͷ��>setting��>ѡ��SSH and GPG Keysѡ�>ճ����ոո��ƵĹ�Կ�����漴��
-ssh -T git@github.com //����Ƿ���֤�ɹ�
+git客户端“连接”GitHub：
+git config --global user.name  "name"             //你的GitHub登陆名
+git config --global user.email "~~~~~~~~~@qq.com" //你的GitHub注册邮箱
+git config --global --list //查看账户信息
+ssh-keygen -t rsa    //生成秘钥（注意看返回信息，有一个文件夹 保存公钥和私钥）
+                       进去这个文件夹，打开.pub结尾的密钥，这个密钥是公钥，用于外部验证（还有一个私钥，私钥留存）
+                       接下来复制公钥—>登录Github网站—>点击右上角的头像—>setting—>选择SSH and GPG Keys选项—>粘贴你刚刚复制的公钥，保存即可
+ssh -T git@github.com //检查是否验证成功
 
-git config --list //�鿴���е�������Ϣ
+git config --list //查看所有的配置信息
 
-����������룺
-git config --global core.quotepath false  //�ļ�������ʹ������
+解决中文乱码：
+git config --global core.quotepath false  //文件名可以使用中文
 
-�ر�ע�⣺git bashĬ�ϲ��ܸ���ճ���������������git bash��>�һ���������>���ԡ�>��ѡ ���ٱ༭ģʽ
-
-
-
-
-
-//2 GitHub�������
-��GitHub�½�һ���ֿ�(Repositories)��ע�� �ֿ��½��ɹ�֮�� ����ֿ�(����Ŀ��ҳ�� ���Կ������ֿ����ӡ����磺https://github.com/lionheart21st/test_1.git
-�ڱ��أ����ԣ��½�һ������Ŀ¼������GitWorkSpace�������ļ������ڴ�š�GitHub�ϵĲֿ⡱ //GitHub���м����ֿ� ����Ŀ¼�оͿ����м�����ͬ���ļ��С�(������)
-�ڹ���Ŀ¼�У��һ�--ѡ��git bush--���룺
-git clone ���ֿ����ӡ�   //���е���Ҫ������GitHub���û������� //git���GitHub����Ŀ��ҳ��������Ŀ�ļ��е����أ�Ҳ����˵���ڱ��صĹ���Ŀ¼�� ���Զ��½�һ������Ŀͬ�����ļ��У��ҳ�֮Ϊ����ĿĿ¼������
-                                                              //ע�⣺����ĿĿ¼���ж�����һ�����صġ�.gitĿ¼��������Ŀ¼�� û�У���//�С�.gitĿ¼����Ŀ¼ ���ܡ�����������git�����
-
-Ȼ���ڹ���Ŀ¼�� ���롰��ĿĿ¼�������򣬡�git�����С���ֱ��cd������ĿĿ¼����//ע�⣺��git�����С�����ʾ��ǰĿ¼������ǰ�ֿ⣩ ͬʱҲ����ʾ��ǰ��֧�������������һ��Ҫǿ��
-
-����
-�ڡ���ĿĿ¼���� �½�һ���ļ���mytest.txt   //���磬�ѿ����õ�һ������ģ�� ճ��������ĿĿ¼����
-git status  //������Ϣ�У����Կ�����Untracke files(�ļ��� ��ɫ����)��  //Untracke��ʾ δ׷���ļ�
-git add mytest.txt  //�ļ�������tab��ȫ
-git status  //������Ϣ�У����Կ���changs to be committed: new file:�ļ�������ɫ���壩
-git commit -m '���� mytest.txt'   //-m��ʾcommit��ʱ�򸽴�����Ϣ��һ��Ҫ��-m��������ϢҪ�к��� ���԰����º���䣩 //ע�⣺commit�ɹ��ķ�����Ϣ��[��֧�� �汾id��ǰ��λ] �汾����
-git log   //�鿴commit�Ƿ�ɹ��������£����ϣ���־��¼��ʱ�䡢���ߡ���Ϣ �Ƿ���ȷ //Ӣ��״̬�� ��q�˳�log����Լ�ȴ�һ���ӣ�
-git push  //���е���Ҫ������GitHub���û������� //���ļ��ϴ���GitHub����Ӧ�ֿ���
-
-�ģ�
-�ڡ���ĿĿ¼���� �޸��ļ���mytest.txt  //Ҳ���ԣ����޸Ĺ�mytest.txtճ�����ǵ�����ĿĿ¼����
-git status  //������Ϣ�У����Կ�����Changes not staged for commit(�ļ��� ��ɫ����)��
-git add mytest.txt  //�ļ�������tab��ȫ
-git status  //������Ϣ�У����Կ���changs to be committed: new file:�ļ�������ɫ���壩
-git commit -m '�޸� mytest.txt ��һ��'   //-m��ʾcommit��ʱ�򸽴�����Ϣ��һ��Ҫ��-m��������ϢҪ�к��� ���԰����º���䣩//ע�⣺commit�ɹ��ķ�����Ϣ��[��֧�� �汾id��ǰ��λ] �汾����
-git log   //�鿴commit�Ƿ�ɹ��������£����ϣ���־��¼��ʱ�䡢���ߡ���Ϣ �Ƿ���ȷ //Ӣ��״̬�� ��q�˳�log����Լ�ȴ�һ���ӣ�
-git push  //���е���Ҫ������GitHub���û������� //���ļ������µ���GitHub����Ӧ�ֿ���
-
-ɾ��
-��GitHub�Ĳֿ��У����Ҫɾ�����ļ��������ļ��޸�ҳ ���Сͼ�ꡰ����Ͱ������commitҳ�������ɫ��ť��Commit changes����
-Ȼ�󣬻��Զ���ת����Ŀ��ҳ ���Կ����ļ��Ѿ���ɾ�������Сͼ�ꡰʱ�� ����commits�� ���Կ������µ���־����ɾ���ļ�����־��
-
-�ڱ��صġ���ĿĿ¼���У��һ�--ѡ��git bush��  //�ر�ע�⣺��ʱ git status���ص���Ϣ�ǡ�nothing to commit,working tree clean��Ҳ����˵git status�ǲ�����⵽Զ�˲ֿ�ı仯�ģ�ͬ����git logҲ�����������µ���־������ɾ���ļ�����־��
-git pull  //���е���Ҫ������GitHub���û������� //��GitHub��Ӧ�ֿ�ı仯��ͬ���������أ���Ӧ���ļ�Ҳ���ڱ��ر�ɾ����
-git log   //��ʱ�����Կ��������µ���־������ɾ���ļ�����־����   //�Ҳ£�push pull����ͬ�����ء�Զ�˲ֿ���ļ�(����˵�汾) Ҳͬ�����ء�Զ�˲ֿ����־��
-
-
-��������
-��GitHub�Ĳֿ��У����Ҫ���������ļ��������ļ��޸�ҳ ���Сͼ�ꡰǦ�ʡ� �����޸�ҳ�����Ϸ� �޸��ļ���Ҳ�����޸��ļ�·�������ļ��ŵ���Ŀ¼�У��������ɫ��ť��Commit changes����
-�ڱ��صġ���ĿĿ¼���У��һ�--ѡ��git bush��  //�ر�ע�⣺��ʱ git status���ص���Ϣ�ǡ�nothing to commit,working tree clean��Ҳ����˵git status�ǲ�����⵽Զ�˲ֿ�ı仯�ģ�ͬ����git logҲ�����������µ���־������ɾ���ļ�����־��
-git pull  //���е���Ҫ������GitHub���û������� //��GitHub��Ӧ�ֿ�ı任��ͬ���������أ���Ӧ���ļ�Ҳ���ڱ��ر�ɾ����
-git log   //��ʱ�����Կ��������µ���־������ɾ���ļ�����־����   //�Ҳ£�push pull����ͬ�����ء�Զ�˲ֿ���ļ�(����˵�汾) Ҳͬ�����ء�Զ�˲ֿ����־��
+特别注意：git bash默认不能复制粘贴，解决方法：打开git bash—>右击标题栏—>属性—>勾选 快速编辑模式
 
 
 
 
 
+///2 GitHub极简操作
+在GitHub新建一个仓库(Repositories)，注意 仓库新建成功之后 进入仓库(即项目主页） 可以看到“仓库连接”比如：https://github.com/lionheart21st/test_1.git
+在本地（电脑）新建一个工作目录（比如GitWorkSpace），此文件夹用于存放“GitHub上的仓库” //GitHub上有几个仓库 工作目录中就可以有几个“同名文件夹”(见下文)
+在工作目录中，右击--选择git bush--输入：
+git clone “仓库连接”   //会有弹窗要求输入GitHub的用户名密码 //git会从GitHub的项目主页中下载项目文件夹到本地（也就是说，在本地的工作目录中 会自动新建一个如项目同名的文件夹，我称之为“项目目录”。）
+                                                              //注意：“项目目录”中都有有一个隐藏的“.git目录”（工作目录中 没有）！//有“.git目录”的目录 才能“在其中运行git命令”！
 
-//ԭ�������򣩣�
-��������������Ϊ���Եı���Ŀ¼�����������еġ���ĿĿ¼����   //git status������ ��ɫ�ļ��������ǹ������е��ļ� //�½����ļ����޸ĵ��ļ��������������ļ������ڹ������У�
-�ݴ�����git add����ļ����ӵ��ݴ�����Ҳ�ƻ����� ��           //git status������ ��ɫ�ļ����������ݴ����е��ļ� //��β鿴�ݴ����е��ļ���ʹ��git ls-files�鿴
-���زֿ⣺��ʵ���ǹ������е�����Ŀ¼��.gitĿ¼�� //��svn���༯��ʽ�汾���� ��û�б��زֿ�ģ� //���زֿ�������Щ�ļ���ʹ��git ls-tree --full-tree -r --name-only HEAD�鿴 //��� �ݴ����뱾�زֿ���һ�µģ�git status���ء�nothing to commit������ô �����������������Ӧ����һ���ģ�
+然后，在工作目录中 进入“项目目录”（或则，“git命令行”中直接cd到“项目目录”）//注意：“git命令行”会显示当前目录（即当前仓库） 同时也会显示当前分支，对这个敏感性一定要强！
+
+增：
+在“项目目录”中 新建一个文件，mytest.txt   //比如，把开发好的一个代码模块 粘贴到“项目目录”中
+git status  //返回信息中，可以看到“Untracke files(文件名 红色字体)”  //Untracke表示 未追踪文件
+git add mytest.txt  //文件名可以tab补全
+git status  //返回信息中，可以看到changs to be committed: new file:文件名（绿色字体）
+git commit -m '添加 mytest.txt'   //-m表示commit的时候附带的信息（一定要有-m，而且消息要有含义 可以帮助事后回忆） //注意：commit成功的返回信息：[分支名 版本id的前七位] 版本名称
+git log   //查看commit是否成功，看最新（最上）日志记录的时间、作者、信息 是否都正确 //英文状态下 按q退出log（大约等待一秒钟）
+git push  //会有弹窗要求输入GitHub的用户名密码 //将文件上传到GitHub的相应仓库中
+
+改：
+在“项目目录”中 修改文件，mytest.txt  //也可以，将修改过mytest.txt粘贴覆盖到“项目目录”中
+git status  //返回信息中，可以看到“Changes not staged for commit(文件名 红色字体)”
+git add mytest.txt  //文件名可以tab补全
+git status  //返回信息中，可以看到changs to be committed: new file:文件名（绿色字体）
+git commit -m '修改 mytest.txt 第一次'   //-m表示commit的时候附带的信息（一定要有-m，而且消息要有含义 可以帮助事后回忆）//注意：commit成功的返回信息：[分支名 版本id的前七位] 版本名称
+git log   //查看commit是否成功，看最新（最上）日志记录的时间、作者、信息 是否都正确 //英文状态下 按q退出log（大约等待一秒钟）
+git push  //会有弹窗要求输入GitHub的用户名密码 //将文件“更新到”GitHub的相应仓库中
+
+删：
+在GitHub的仓库中，点击要删除的文件，进入文件修改页 点击小图标“垃圾桶”进入commit页，点击绿色按钮“Commit changes”。
+然后，会自动跳转到项目主页 可以看到文件已经被删除！点击小图标“时钟 数字commits” 可以看到最新的日志（即删除文件的日志）
+
+在本地的“项目目录”中，右击--选择git bush：  //特别注意：此时 git status返回的信息是“nothing to commit,working tree clean”也就是说git status是不能侦测到远端仓库的变化的，同样的git log也看不到“最新的日志”（即删除文件的日志）
+git pull  //会有弹窗要求输入GitHub的用户名密码 //将GitHub相应仓库的变化“同步到”本地，相应的文件也就在本地被删除了
+git log   //此时，可以看到“最新的日志”（即删除文件的日志）了   //我猜，push pull不仅同步本地、远端仓库的文件(或者说版本) 也同步本地、远端仓库的日志！
+
+重命名：
+在GitHub的仓库中，点击要重命名的文件，进入文件修改页 点击小图标“铅笔” 进入修改页，在上方 修改文件（也可以修改文件路径，将文件放到子目录中），点击绿色按钮“Commit changes”。
+在本地的“项目目录”中，右击--选择git bush：  //特别注意：此时 git status返回的信息是“nothing to commit,working tree clean”也就是说git status是不能侦测到远端仓库的变化的，同样的git log也看不到“最新的日志”（即删除文件的日志）
+git pull  //会有弹窗要求输入GitHub的用户名密码 //将GitHub相应仓库的变换“同步到”本地，相应的文件也就在本地被删除了
+git log   //此时，可以看到“最新的日志”（即删除文件的日志）了   //我猜，push pull不仅同步本地、远端仓库的文件(或者说版本) 也同步本地、远端仓库的日志！
 
 
-git�������̣�
-�ڹ��������½����޸�һ���ļ���Ȼ��git add������ļ����ӵ��ݴ�����Ȼ����ͨ��commit���ļ��ύ�����زֿ⣡
-
-���һ���ļ����ڹ������У�ֱ��commit�Ļ� ��ʧ�ܣ���Ϊcommitʧ�ܣ����ء�no changes added to commit������������git log Ҳ��������Ӧ����־��
-ע�⣺��������������ļ�AAA������add����һ���ļ� BBB��commit��Ҳ���ļ�BBB����ô����commit�ɹ�����ȻҲ���ܿ�����־����
-ע�⣺ʵ�⣬git status��Ҫ�С���ɫ�ļ�������commit���ܳɹ���git status�п���ͬʱ�С���ɫ�ͺ�ɫ�ļ�������commitҲ�ܳɹ� //commit�ύ�ľ����ݴ����е����ݣ������ύ�����������ݣ���Ҫ�����ݿ����ύ commit���ܳɹ������ܲ���log����
 
 
 
-///���ؿ������
+///3原理（极简）：
+工作区：简单理解为电脑的本地目录（就是上文中的“项目目录”）   //git status看到的 红色文件名，就是工作区中的文件 //新建的文件、修改的文件、拷贝过来的文件，都在工作区中！
+暂存区：git add命令将文件添加到暂存区（也称缓冲区 ）           //git status看到的 绿色文件名，就是暂存区中的文件 //如何查看暂存区中的文件？使用git ls-files查看
+本地仓库：其实就是工作区中的隐藏目录“.git目录” //像svn这类集中式版本控制 是没有本地仓库的！ //本地仓库中有哪些文件？使用git ls-tree --full-tree -r --name-only HEAD查看 //如果 暂存区与本地仓库是一致的（git status返回“nothing to commit”）那么 这两个命令看到的内容应该是一样的！
+
+git工作流程：
+在工作区中新建或修改一个文件，然后git add将这个文件添加到暂存区，然后再通过commit将文件提交到本地仓库！
+
+如果一个文件还在工作区中，直接commit的话 会失败！因为commit失败（返回“no changes added to commit”），所以用git log 也看不到相应的日志！
+注意：如果工作区中有文件AAA，但是add了另一个文件 BBB，commit的也是文件BBB，那么可以commit成功（当然也可能看到日志）！
+注意：实测，git status中要有“绿色文件名”，commit才能成功！git status中可以同时有“绿色和红色文件名”，commit也能成功 //commit提交的就是暂存区中的内容（不会提交工作区中内容），要有内容可以提交 commit才能成功（才能产生log）！
+
+
+
+
+
+///4本地库操作：
 //
-��ʼ�����زֿ⣺             //ע�⣺һ��ʼ���������б��زֿ⣨û��Զ�ֿ̲⣩�����زֿⱾ������ʵ�ְ汾���ơ���֧������
-�ڱ�������һ��Ŀ¼�У������� �һ�--ѡ��git bush--���룺
-git init   //��ʼ�����زֿ⣬��ʵ�����ڵ�ǰĿ¼���½�һ������Ŀ¼��.gitĿ¼��//�С�.gitĿ¼�����ǵ�ǰĿ¼�� ������git�����ǰ�ᡣ�ҵ����⣺��.gitĿ¼���Ե�ǰĿ¼�е��ļ� �����˰汾���ƣ�
-
-//
-�ļ��������Ĳ���ͬ����
-
+初始化本地仓库：             //注意：一开始，可以先有本地仓库（没有远程仓库），本地仓库本身就能实现版本控制、分支管理！
+在本地任意一个目录中，都可以 右击--选择git bush--输入：
+git init   //初始化本地仓库，其实就是在当前目录中新建一个隐藏目录“.git目录”//有“.git目录”，是当前目录下 可以敲git命令的前提。我的理解：“.git目录”对当前目录中的文件 进行了版本控制！
 
 
 //
-�鿴�ļ��޸ģ�       
-git diff HEAD -- �ļ���  //�ļ�������tab��ȫ   //ע�⣺���޸Ĺ����ļ� �϶��ڹ������У�git status������ ��ɫ�ļ�����
-���У�                                         //ע�⣺���������ļ����ݴ����е��ļ���ʹ��git diff������������һ���ġ����زֿ��е��ļ���git diff���ص���Ϣ�ǡ��ա���//�Ҿ��ã�ԭ�����ǽ����������ݴ������ļ� �뱾�زֿ��е�ͬ���ļ� ���бȶԣ����� һ���ύ �ȶԽ����Ȼ�ǡ��ա���
----��ʾ�䶯֮ǰ���ļ� +++��ʾ�䶯֮����ļ�
-@@��ʾ�䶯λ��@@������@@ -1,3 +1,4 @@ ��ʾ ֮ǰ���ļ���1��3�иı��� ֮����ļ���1��4�иı���
-+ɶɶɶ ��ʾ������ɶɶɶ����   
--ɶɶɶ ��ʾɾ����ɶɶɶ����
-
-ע�⣺������Ͽ��ļ����޸ģ����Գ���������Ͽ��ļ����޸ģ������ύ��
+文件的增、改操作同上文
 
 
 //
-�����ļ��ݴ棺
-git reset HEAD -- �ļ��� //�ļ�������tab��ȫ  //ע�⣺���������ĺ��壺���ļ����ݴ����г�����������(�򵥽� ���ǽ���ɫ�ļ��� ��ɺ�ɫ�ļ���)//�ر�ע�⣺���ύ֮ǰ �ǿ��Գ����޸ĵģ�һ��commit �Ͳ����ٳ����ˣ���
-                                              //ע�⣺˫����-- ���棨���ļ���ǰ�棩һ��Ҫ�пո񣬷�������ȷִ��
-                                              //ע�⣺���� �����ܽ����������ļ��ı任 ȡ����������Ҫ��ͨ�� �汾���� ���ܽ����������ļ��ı任 ȡ��������
-//
-git log�������
-git log -5    //ֻ������µ�5��
-git long -5 --pretty=oneline   //--pretty=oneline����ÿ����־����Ϣ��һ��һ����־
+查看文件修改：       
+git diff HEAD -- 文件名  //文件名可以tab补全   //注意：刚修改过的文件 肯定在工作区中（git status看到的 红色文件名）
+其中：                                         //注意：工作区中文件、暂存区中的文件，使用git diff看到的内容是一样的。本地仓库中的文件，git diff返回的信息是“空”！//我觉得，原理就是将工作区、暂存区的文件 与本地仓库中的同名文件 进行比对，所以 一但提交 比对结果当然是“空”！
+---表示变动之前的文件 +++表示变动之后的文件
+@@表示变动位置@@，比如@@ -1,3 +1,4 @@ 表示 之前的文件第1到3行改变了 之后的文件第1到4行改变了
++啥啥啥 表示增加了啥啥啥内容   
+-啥啥啥 表示删除了啥啥啥内容
+
+注意：如果不认可文件的修改，可以撤销。如果认可文件的修改，可以提交！
 
 
 //
-�汾���ˣ��ص���ȥ����          //ע�⣺һ��commit�൱�ڲ���һ���汾��һ��log��Ӧ��һ���汾����������Ϊһ������¼���桱��
-git reset --hard HEAD^  //ע�⣺HEAD���Ͻ�һ�����ϼ�š���ʾ����һ��log  //һ�㣬�汾���� ��Ӧ�š�log��������ã���������˼���log
-                        //ע�⣺�볷���ļ��ݴ�һ�� �����õ�git reset �������� --hard
-                        //�ر�ע�⣺Ҫ������˵���˼������HEAD^^^,��������log������log�ġ����� ��aaa,bbb,ccc������ô���ǻ��˵�ccc�����ң���ʱgit log������aaa��bbb�ˣ���ʵ aaa��bbbû����ʧ�����ڣ���
-���أ�HEAD is now at ��־ID��7λ�� ��־��Ϣ
-
-git reset --hard HEAD~����  //ע�⣺HEAD���Ͻǲ��˺�~���� ��ʾ���˶��ٸ�log
-git reset --hard ��־ID��7λ���ϼ��ɣ� //ע�⣺�����־IDд�Ĳ��ԣ�����ִ�оͻ�ʧ��fatal: ambiguous argument 'ɶɶɶ'��unknown viesion or path not in...
-
+撤销文件暂存：
+git reset HEAD -- 文件名 //文件名可以tab补全  //注意：“撤销”的含义：将文件从暂存区中撤销到工作区(简单讲 就是将绿色文件名 变成红色文件名)//特别注意：在提交之前 是可以撤销修改的（一但commit 就不能再撤销了）！
+                                              //注意：双减号-- 后面（即文件名前面）一定要有空格，否则不能正确执行
+                                              //注意：撤销 并不能将“工作区文件的变换 取消掉”！需要，通过 版本回退 才能将“工作区文件的变换 取消掉”！
 
 
 //
-�ص�δ����
-git reflog  //reflog�鿴���еĲ�����¼(����commit��¼) //log��������commit��¼������ֻ������ǰ�汾��������������ǰ�汾��δ���汾������log�ǿ�����reset������¼�ģ�
-            //ע�⣺reflog�ļ�¼ID����7λ�ģ�reflog�ļ�¼���в����ؼ��� ����reset��commit������commit�ļ�¼ �Ͷ�Ӧ�š��汾��
-
-����reflog���ص���Ϣ��ȷ����Ҫ�ص��ġ�δ���汾������Ӧ��¼ID�����ã�
-git reset --hard ��¼ID��7λ��
+git log简化输出：
+git log -5    //只输出最新的5行
+git long -5 --pretty=oneline   //--pretty=oneline简化了每条日志的信息，一行一条日志
 
 
 //
-�ļ�����ɾ���ָ���          //�ر�ע�⣺���Իָ���ǰ�ᣬ���زֿ��� Ҫ������ļ���
+版本回退（回到过去）：          //注意：一次commit相当于产生一个版本，一个log对应着一个版本（可以理解为一个“记录保存”）
+git reset --hard HEAD^  //注意：HEAD右上角一个“上尖号”表示回退一个log  //一般，版本回退 对应着“log简化输出”敲，算清楚回退几个log
+                        //注意：与撤销文件暂存一样 都是用的git reset 区别在于 --hard
+                        //特别注意：要理解回退的意思，比如HEAD^^^,回退三个log。假如log的“逆序 是aaa,bbb,ccc”，那么就是回退到ccc。而且，此时git log看不到aaa和bbb了（其实 aaa和bbb没有消失，还在）！
+返回：HEAD is now at 日志ID（7位） 日志消息
 
-�����ļ��Ѿ��ύ�����زֿ⣬Ȼ�� ��С�� �ڹ������н��ļ�ɾ���ˣ����� ��Ŀ¼�� �һ��ļ�-->ɾ����
-��ʱ��
-git status���ء�deleted ��ɫ�ļ�����  //ɾ���ļ���Ҳ��һ�ֱ�� //�ر�ע�⣺�����ʱ��git add . Ȼ����commit�����൱��ʵʩ�ˡ��ļ�ɾ�����ӱ��زֿ�ɾ������
-���������
-git checkout -- �ļ���  //�ָ���ɾ�����ļ�
-
-git status���ء�noting to commit,working tree clean��
-
-
-
-//�ָ�ĳ���ļ�����ʷ�汾��     //ע�⣺���ʹ��reset --hard�ص���ʷ�汾����ô�����ļ���ȥ�ˣ����ڣ�ֻҪĳһ���ص���ȥ �����ļ����䣡
-git log //�鿴��ʷ�汾��ȷ����Ҫ�ָ��ĸ���ʷ�汾�е��ļ� �����Ƹ���ʷ�汾��id
-git checkout ��ʷ�汾��id -- �ļ���    //�ָ���ĳ���ļ�����ʷ�汾
-������֡��ָ��Ĳ��ԡ��������Խ��ļ��л�����ǰ�汾��
-git checkout ��ǰ�汾��id -- �ļ���    //�ָ���ĳ���ļ��ĵ�ǰ�汾
-
-
-
+git reset --hard HEAD~数字  //注意：HEAD右上角波浪号~数字 表示回退多少个log
+git reset --hard 日志ID（7位以上即可） //注意：如果日志ID写的不对，命令执行就会失败fatal: ambiguous argument '啥啥啥'：unknown viesion or path not in...
 
 
 //
-�ļ�ɾ�����ӱ��زֿ�ɾ������
+回到未来：
+git reflog  //reflog查看所有的操作记录(包括commit记录) //log看到就是commit记录（而且只到“当前版本”，看不到“当前版本的未来版本”），log是看不到reset操作记录的！
+            //注意：reflog的记录ID都是7位的，reflog的记录都有操作关键字 比如reset、commit，其中commit的记录 就对应着“版本”
 
-�����ļ��Ѿ��ύ�����زֿ⣬������Ҫ �����ļ�ɾ��
-git ls-files  //�鿴���زֿ��е��ļ������� ���زֿ����ݴ�����һ�µģ� //���������Ҫ�����ײֿ��е��ļ��Ļ���git ls-tree --full-tree -r --name-only HEAD  
-git rm �ļ��� //���ļ��ӱ��زֿ��� ɾ����ͬʱҲ���ݴ�������������ɾ�� //������ļ������ڱ��زֿ��У�����fatal :pathspec 'ɶɶɶ'did not match any files. 
-git ls-files  //��ʱ���Ѿ������� ��ɾ���ļ����ļ�����(˵���ļ����ݴ���ɾ����) //git ls-tree --full-tree -r --name-only HEAD Ҳ������ ��ɾ���ļ����ļ����� //�������е㳤����ʵ ���ݴ����ļ����ύ֮���ݴ������ļ� �� �ֿ��е��ļ� ��һ���ģ����ԣ���ʱ������ls-files�������ֿ��е��ļ���
-
-git status ���Կ�����deleted ��ɫ�ļ����� //ɾ���ļ���Ҳ��һ�ֱ�� //��� ��ʱpush������push�ɹ��ġ����ǣ����Զ�˲ֿ���Ҳ������ļ��Ļ�����ʹ��ʱpush�ɹ��� Ҳ����ɾ��Զ�˵��ļ���
-git commit -m 'ɾ��ɶɶɶ'   //commit֮����push�Ļ���Զ�˲ֿ��е��ļ�Ҳ��ɾ���ˣ�
-
-���⣺
-���ļ�ֻ�ڹ������У�Ҳû�ӵ��ݴ�������ȻҲû�ύ�������Ҫɾ�����ļ� �Ǿ�ֱ��ɾ�����һ��ļ�-->ɾ�������ˣ�
-���ļ��Ѿ��ӵ����ݴ����� ��û���ύ�����زֿ⣨��ʱgit staus�ǿ��Կ�������ɫ�ļ������ģ�����Ҫɾ���ļ� ��ֱ��ɾ�����һ��ļ�-->ɾ����Ȼ����git add .һ�£���֤�ݴ�����һ���ԣ���git status���ء�nothing to commit����
-
-
+更加reflog返回的信息，确定所要回到的“未来版本”的相应记录ID，再敲：
+git reset --hard 记录ID（7位）
 
 
 //
-�ļ���������
-git mv ���ļ��� ���ļ���  //ע�⣺���������ͬʱ�޸��ļ�·��
-git status   //���Կ�����ɫ�����ļ�����˵��mv����ֱ�ӽ��ļ��ŵ��ݴ�����
-git commit -m '�������ļ�Ϊɶɶɶ'
+文件（误删）恢复：          //特别注意：可以恢复的前提，本地仓库中 要有这个文件。
 
-���⣺
-��� �ڲ��������������ļ������� �һ��ļ�--����������git status�ῴ����������ɫ�ļ�������deleted���ļ��������ļ�����
-��ʱ��ֻҪ����git add . ,�Ϳ��Կ�������ɫ�ļ�������renamed:���ļ���->���ļ�������
-��git commit -m '�������ļ�Ϊɶɶɶ'   //��ʵ��-m�������Ϣ ʹ��˫���š������� ������ʹ������ ���У�
+假设文件已经提交到本地仓库，然而 不小心 在工作区中将文件删除了（比如 在目录中 右击文件-->删除）
+此时：
+git status返回“deleted 红色文件名”  //删除文件，也是一种变更 //特别注意：如果此时，git add . 然后再commit，就相当于实施了“文件删除（从本地仓库删除）”
+解决方法：
+git checkout -- 文件名  //恢复误删除的文件
+
+git status返回“noting to commit,working tree clean”
 
 
+//恢复某个文件的历史版本：     //注意：如果使用reset --hard回到历史版本，那么所有文件回去了！现在，只要某一个回到过去 其他文件不变！
+git log //查看历史版本，确定需要恢复哪个历史版本中的文件 并复制该历史版本的id
+git checkout 历史版本的id -- 文件名    //恢复了某个文件的历史版本
+如果发现“恢复的不对”，还可以将文件切换到当前版本：
+git checkout 当前版本的id -- 文件名    //恢复到某个文件的当前版本
 
-//*��֧
-һ������֧master�������ߣ���������һ�㲻��ֱ��������֧�Ͽ����ġ�      //�ر�ע�⣺����ôǡ���ıȷ����ֿ��ǡ��������� ��֧�ǡ��߼����ģ�����˵ ��֧���ǡ���������Ĳֿ⡱��
-һ���ڻ����������ȥһ����֧�������dev��,Ȼ�� �������dev��֧�Ͽ������������ԣ�ȷ��û������֮�� �ٽ�dev��֧�ϲ�������֧�ϣ�
-���
-git checkout ��֧��          //�л���ָ����֧
-git checkout -b �·�֧��     //�½���֧�����л����·�֧(�·�֧�����˵�ǰ��֧�����ݣ� //-b ò�ƾ���brach����˼    //Ĭ�� �ӵ�ǰ��֧�½��������ơ����·�֧
-git checkout -d ��֧��       //ɾ��ָ����֧             //-d ò�ƾ���delete����˼
-git branch                   //�鿴���з�֧��*�Ǻű�ʾ��ǰ���ڷ�֧����ǰ��֧����ɫ�ģ�
-git merge branch             //�ϲ���֧    //�ر�ע�⣺ֻ���������Ϻϲ���֧�������ڷ�֧�Ϻϲ����ɣ�
-git branch -m  �Ϸ�֧�� �·�֧��    //��֧������
-git branch -M  �Ϸ�֧�� �·�֧��    //ǿ�Ʒ�֧����������� ����·�֧���Ѿ����ڣ�����Ҫǿ�ƣ��е㸲�ǵ���˼������
 
-ʵ�٣�
-git branch      //������Ϣ��*main   //ע�⣺���main��������֧master
-git ls-tree --full-tree -r --name-only HEAD  //�鿴����֧���زֿ��е��ļ���README.md
+//
+文件删除（从本地仓库删除）：
 
-git checkout -b leaf01   //������Ϣ��witched to a new branch 'leaf01'
-git branch      //������Ϣ��*leaf01
+假设文件已经提交到本地仓库，现在需要 将该文件删除
+git ls-files  //查看本地仓库中的文件（假设 本地仓库与暂存区是一致的） //如果，较真要看本底仓库中的文件的话，git ls-tree --full-tree -r --name-only HEAD  
+git rm 文件名 //将文件从本地仓库中 删除，同时也从暂存区、工作区中删除 //如果，文件名不在本地仓库中，报错fatal :pathspec '啥啥啥'did not match any files. 
+git ls-files  //此时，已经看不到 被删除文件的文件名了(说明文件从暂存区删除了) //git ls-tree --full-tree -r --name-only HEAD 也看不到 被删除文件的文件名了 //该命令有点长，其实 当暂存区文件都提交之后，暂存区的文件 与 仓库中的文件 是一样的！所以，此时可以用ls-files“看”仓库中的文件！
+
+git status 可以看到“deleted 绿色文件名” //删除文件，也是一种变更 //如果 此时push，是能push成功的。但是，如果远端仓库中也有这个文件的话，即使此时push成功了 也不会删除远端的文件！
+git commit -m '删除啥啥啥'   //commit之后，再push的话，远端仓库中的文件也被删除了！
+
+另外：
+若文件只在工作区中（也没加到暂存区、当然也没提交），如果要删除该文件 那就直接删除（右击文件-->删除）好了！
+若文件已经加到在暂存区了 还没有提交到本地仓库（此时git staus是可以看到“绿色文件名”的），若要删除文件 先直接删除（右击文件-->删除）然后再git add .一下（保证暂存区的一致性，即git status返回“nothing to commit”）
+
+
+//
+文件重命名：
+git mv 老文件名 新文件名  //注意：该命令可以同时修改文件路径
+git status   //可以看到绿色的新文件名，说明mv命令直接将文件放到暂存区了
+git commit -m '重命名文件为啥啥啥'
+
+另外：
+如果 在操作中重命名了文件（比如 右击文件--重命名），git status会看到两个“红色文件名”（deleted老文件名、新文件名）
+此时，只要再敲git add . ,就可以看到“绿色文件名”（renamed:老文件名->新文件名）。
+再git commit -m '重命名文件为啥啥啥'   //其实，-m后面的消息 使用双引号、单引号 甚至不使用引号 都行！
+
+
+//*分支
+一般主分支master用于上线（生产），一般不会直接在主分支上开发的。      //特别注意：不怎么恰当的比方，仓库是“物理”的 分支是“逻辑”的（或者说 分支就是“虚拟出来的仓库”）
+一般在会从主干上拉去一个分支（比如叫dev）,然后 就在这个dev分支上开发。经过测试，确定没有问题之后 再将dev分支合并到主分支上！
+命令：
+git checkout 分支名          //切换到指定分支
+git checkout -b 新分支名     //新建分支，并切换到新分支(新分支复制了当前分支的内容） //-b 貌似就是brach的意思    //默认 从当前分支新建（“复制”）新分支
+git checkout -d 分支名       //删除指定分支             //-d 貌似就是delete的意思
+git branch                   //查看所有分支，*星号表示当前所在分支（当前分支是绿色的）
+git merge branch             //合并分支    //特别注意：只能在主干上合并分支，不能在分支上合并主干！
+git branch -m  老分支名 新分支名    //分支重命名
+git branch -M  老分支名 新分支名    //强制分支重命名。如果 这个新分支名已经存在，就需要强制（有点覆盖的意思）！？
+
+实操：
+git branch      //返回信息：*main   //注意：这个main就是主分支master
+git ls-tree --full-tree -r --name-only HEAD  //查看主分支本地仓库中的文件：README.md
+
+git checkout -b leaf01   //返回信息：witched to a new branch 'leaf01'
+git branch      //返回信息：*leaf01
                             main
-�ڹ��������½��ļ� ����1.txt
-git add '����1.txt'
-git commit -m '�����ļ� ����1.txt'
-git ls-tree --full-tree -r --name-only HEAD  //�鿴leaf01��֧���زֿ��е��ļ���README.md
-                                                                               ����1.txt
+在工作区中新建文件 测试1.txt
+git add '测试1.txt'
+git commit -m '添加文件 测试1.txt'
+git ls-tree --full-tree -r --name-only HEAD  //查看leaf01分支本地仓库中的文件：README.md
+                                                                               测试1.txt
 
-git checkout main  //�ص�������//��ʱ���ڹ������� �������ļ� ����1.txt��
-git ls-tree --full-tree -r --name-only HEAD  //�鿴����֧���زֿ��е��ļ���README.md
-git merge leaf01   //�ϲ���֧leaf01  //������Ϣ��Updating  ...
+git checkout main  //回到主分区//此时，在工作区中 看不到文件 测试1.txt了
+git ls-tree --full-tree -r --name-only HEAD  //查看主分支本地仓库中的文件：README.md
+git merge leaf01   //合并分支leaf01  //返回信息：Updating  ...
                                                  Fast-forward
-					         ����1.txt | 0     //���Կ�����ص��ļ���
+					         测试1.txt | 0     //可以看到相关的文件名
                                                  ...
-git ls-tree --full-tree -r --name-only HEAD  //�鿴����֧���زֿ��е��ļ���README.md
-                                                                           ����1.txt   //merge֮������֧���زֿ��������ļ�
-                                             //��ʱ���ڹ����� Ҳ�ܿ����ļ� ����1.txt
+git ls-tree --full-tree -r --name-only HEAD  //查看主分支本地仓库中的文件：README.md
+                                                                           测试1.txt   //merge之后，主分支本地仓库多了这个文件
+                                             //此时，在工作区 也能看见文件 测试1.txt
 
-git branch leaf01 leaf001    //��������֧leaf01Ϊleaf001
-git branch    //������Ϣ��leaf001
+git branch leaf01 leaf001    //重命名分支leaf01为leaf001
+git branch    //返回信息：leaf001
                           *main
 
-git branch -d leaf001   //ɾ����֧leaf001
-git branch    //������Ϣ��*main
+git branch -d leaf001   //删除分支leaf001
+git branch    //返回信息：*main
 
 
-�ر�ע�⣺git�����еġ�����ʾ��ÿ�����������һ�� ����������ʾ�����ĺ��������ֶ������ر���Ҫ������������·�� (��ǰ��֧����)
-��Ҫ�ر����У���ǰ�����Ķ�����˭�����ĸ��ֿ⣿�ĸ���֧������ÿ�λس�֮ǰ ���ټ��һ�£�   ע�⣺������������ �Ͳֿ������
+特别注意：git命令行的“行显示（每次敲命令的上一行 都会有行显示）”的后面两个字段内容特别重要：工作区绝对路径 (当前分支名称)
+需要特别敏感：当前操作的对象是谁（是哪个仓库？哪个分支？），每次回车之前 都再检查一下！   注意：工作区的名称 就仓库的名称
 
-�ر�ע�⣺��git status�к�ɫ�ļ�������ɫ�ļ���ʱ���л���֧��ʧ�ܣ�
-������error:Your local changes to the following files would be overwritten by checkout:
-            �ļ���     //��ʾ���ļ����޸ģ��ᶪʧ
-����������򵥵ķ�����commit�ύ��������� ������ñ�����Զ�ʧ�Ļ� �ǾͿ��ԡ��ص���ȥ��
-          ˮƽ��һ�㷽����stash������
-���磺
-git status //���أ���ɫ�ļ��� ���� ��ɫ�ļ���  //���赱ǰ��master��֧
-git checkout leaf01            //error //�к�ɫ������ɫ�ļ������������л���֧
-git stash save 'master_�ļ���' //����ʹ��save�ؼ��� ���Դ�����Ϣ����Ϣ����Ϊ'��֧��_�ļ���' ��߿ɶ���
-                               //stash����һ�������������������Լ�����������������������������������Ǹ�����֧�������� ���֧��
-git status //���أ�nothing to commit,work tree clean
-git checkout leaf01  //�л���֧leaf01�ɹ�
-git stash list  //���أ�stash@{0}:On master: master_�ļ���
-git checkout master  //���л�Ϊ����֧master
-git stash list  //���أ�stash@{0}:On master: master_�ļ���
-git stash pop   //�������������桱�����Կ��� ��ɫ�ļ���
-git stash list  //���أ��� //Ҳ����˵���ղŵġ��������桱�Ѿ���ɾ���ˣ�����pop�Ķ��壩
-git status //���أ���ɫ�ļ��� //��տ�ʼһ��������һ��ʼ�Ǻ�ɫ������ɫ�����ڶ��Ǻ�ɫ��
-���飺��Ȼstash�ǿ��֧�����ܱȽ�ǿ�󣩣����ǽ��� ��Ҫ���׿��֧ʹ�ã���Ϊ��ͬ��֧��ͬһ�ļ������ݿ��ܲ���ϴ� ��ʱ��ʹ��stash���п��ܵ��¡�merge���󡱣�
-      ����򵥵�ʹ��stash���� �к����ļ������²����л���֧ʱ&����Ҫ�л���֧��ʱ�� �����湤�����л���֧��Ȼ���л�����֮�� ���ָ�����&������桱�� 
-
-
+特别注意：当git status有红色文件名、绿色文件名时，切换分支会失败！
+报错：error:Your local changes to the following files would be overwritten by checkout:
+            文件名     //提示该文件的修改，会丢失
+解决方法：简单的方法，commit提交变更，或者 如果觉得变更可以丢失的话 那就可以“回到过去”
+          水平高一点方法，stash保存变更
+比如：
+git status //返回：红色文件名 或者 绿色文件名  //假设当前在master分支
+git checkout leaf01            //error //有红色或者绿色文件名，都不能切换分支
+git stash save 'master_文件名' //建议使用save关键字 可以带上信息，信息建议为'分支名_文件名' 提高可读性
+                               //stash就是一个“工作保存区（我自己的命名）”，而且这个“工作保存区”是各个分支共享（即 跨分支）
+git status //返回：nothing to commit,work tree clean
+git checkout leaf01  //切换分支leaf01成功
+git stash list  //返回：stash@{0}:On master: master_文件名
+git checkout master  //再切换为主分支master
+git stash list  //返回：stash@{0}:On master: master_文件名
+git stash pop   //弹出“工作保存”，可以看到 红色文件名
+git stash list  //返回：空 //也就是说，刚才的“工作保存”已经被删除了（符合pop的定义）
+git status //返回：红色文件名 //与刚开始一样（不管一开始是红色还是绿色，现在都是红色）
+经验：虽然stash是跨分支（功能比较强大），但是建议 不要轻易跨分支使用，因为不同分支的同一文件的内容可能差异较大 这时候使用stash很有可能导致“merge错误”！
+      就最简单的使用stash，即 有红绿文件名导致不能切换分支时&又需要切换分支的时候 “保存工作”切换分支，然后切换回来之后 “恢复工作&清楚保存”！ 
 
 
-//*��֧��ͻ  //����Ŀ���������У��ԡ���ͬ��֧��ͬ���ļ��������޸ĺ��ٺϲ�ʱ���ͻ�����ļ��޸ĳ�ͻ //ò�ƣ�git���жϻ��ƣ�ͬһ���ļ�����ͬ�� ���ݲ�һ�������ж�Ϊ��ͻ
-git branch   //���أ�leaf01
+//*分支冲突  //在项目开发过程中，对“不同分支的同名文件”进行修改后再合并时，就会出现文件修改冲突 //貌似，git的判断机制：同一个文件的相同行 内容不一样，就判定为冲突
+git branch   //返回：leaf01
                      *master
-�ڹ������У��޸��ļ�Markdown�����﷨.txt�����ݣ��ڵ�һ��д�ϡ�ͨ�����ɲ��ԡ���  
-git add Markdown�����﷨.txt
-git commit -m 'ͨ�����ɲ��� Markdown�����﷨'
+在工作区中，修改文件Markdown极简语法.txt的内容（在第一行写上“通过主干测试”）  
+git add Markdown极简语法.txt
+git commit -m '通过主干测试 Markdown极简语法'
 
-git checkout leaf01  //�л�����֧leaf01
-�ڹ������У��޸��ļ�Markdown�����﷨.txt�����ݣ��ڵ�һ��д�ϡ�ͨ����֧���ԡ���  //���޸�֮ǰ������ȡ��Ҽ�--ˢ�¡�
-git add Markdown�����﷨.txt
-git commit -m 'ͨ�����ɲ��� Markdown�����﷨'
+git checkout leaf01  //切换到分支leaf01
+在工作区中，修改文件Markdown极简语法.txt的内容（在第一行写上“通过分支测试”）  //在修改之前，最好先“右键--刷新”
+git add Markdown极简语法.txt
+git commit -m '通过主干测试 Markdown极简语法'
 
-git checkout master  //�л�����֧master
-git merge leaf01     //���ɺϲ�leaf01��֧
-                     //���أ�CONFLICT(content):Merge conflict in Markdown�����﷨.txt
+git checkout master  //切换到分支master
+git merge leaf01     //主干合并leaf01分支
+                     //返回：CONFLICT(content):Merge conflict in Markdown极简语法.txt
                              Automatic merge failed:fix conflicts and then commit the result.
-�ر�ע�⣺��ʱ��git�����еġ�����ʾ����Բ����Ϊ(master|MERGING)  //�ϲ���������ʱ���Ż�������������ϲ�û������ Ӧ����(master) ��
-���������У�˫�����ļ������Կ����ļ����� �������Ĳ��֣�
-<<<<<<< HEAD        //��<<<<<<< HEAD��֮�� ��=======��֮�ϣ��ǵ�ǰ��֧�ĳ�ͻ����
-�������ɲ���
+特别注意：此时，git命令行的“行显示”的圆括号为(master|MERGING)  //合并出现问题时，才会这样！如果，合并没有问题 应该是(master) ！
+到工作区中，双击打开文件，可以看到文件内容 有这样的部分：
+<<<<<<< HEAD        //“<<<<<<< HEAD”之下 “=======”之上，是当前分支的冲突内容
+添加主干测试
 =======
-ͨ����֧����        //��=======��֮�� ��>>>>>>> leaf01��֮�ϣ�����һ����֧�ĳ�ͻ����
+通过分支测试        //“=======”之下 “>>>>>>> leaf01”之上，是另一个分支的冲突内容
 >>>>>>> leaf01
 
-���ⲿ�������ֹ��޸�Ϊ��ͨ�����ɡ���֧����     //�����У����ڷ�֧��ͻ ��Ҫ ����������������
-git add Markdown�����﷨.txt
-git commit -m '������ͻ Markdown�����﷨.txt'  //�ر�ע�⣺��ʱ git�����еġ�����ʾ����Բ���Ÿ�Ϊ(master)����˵�������ˣ�
+将这部分内容手工修改为：通过主干、分支测试     //生产中，对于分支冲突 需要 具体问题具体分析！
+git add Markdown极简语法.txt
+git commit -m '处理冲突 Markdown极简语法.txt'  //特别注意：此时 git命令行的“行显示”的圆括号该为(master)，就说明正常了！
 
 git checkout leaf01
-���������У�˫�����ļ������Կ����ļ��ĵ�һ�� ���ǡ�ͨ����֧���ԡ�  //Ҳ����˵ ��֧�е�ͬ���ļ� ��û���ܵ�����ͻ��������Ӱ�죡
+到工作区中，双击打开文件，可以看到文件的第一行 还是“通过分支测试”  //也就是说 分支中的同名文件 并没有受到“冲突处理”的影响！
 
-git log --graph --pretty=oneline  //--graph �á�����ͼ������ʽ չʾ �ϲ���ͻ��֧
-
-
+git log --graph --pretty=oneline  //--graph 用“点线图”的形式 展示 合并冲突分支
 
 
 
 
 
+///5远程仓库操作：
+远程仓库是协同开发的基础，本地仓库与远程仓库的同步是关键！
+“直觉上同步的 是仓库，其实同步的 是分支”！而且 同步是有“方向”的：是本地分支同步到远程，还是远程分支同步到本地？！
 
 
-///Զ�ֿ̲������
-Զ�ֿ̲���Эͬ�����Ļ��������زֿ���Զ�ֿ̲��ͬ���ǹؼ���
-��ֱ����ͬ���� �ǲֿ⣬��ʵͬ���� �Ƿ�֧�������� ͬ�����С����򡱵ģ��Ǳ��ط�֧ͬ����Զ�̣�����Զ�̷�֧ͬ�������أ���
+//克隆（下载项目）：                 //场景：先有远程仓库，再有本地仓库！    
+先进入工作目录，右击->git bash->输入：         
+git clone 项目仓库连接   //在项目主页上拷贝项目仓库连接，clone运行完毕之后 自动在工作目录中建立“项目的工作区（即 项目同名目录，其中还有隐藏目录.git）”
+
+注意：也可以在GitHub的项目主页上 下载ZIP压缩包
 
 
-//��¡��������Ŀ����                 //����������Զ�ֿ̲⣬���б��زֿ⣡    
-�Ƚ��빤��Ŀ¼���һ�->git bash->���룺         
-git clone ��Ŀ�ֿ�����   //����Ŀ��ҳ�Ͽ�����Ŀ�ֿ����ӣ�clone�������֮�� �Զ��ڹ���Ŀ¼�н�������Ŀ�Ĺ��������� ��Ŀͬ��Ŀ¼�����л�������Ŀ¼.git����
+//推送：                             //场景：先有本地仓库，再有远程仓库！将本地仓库的内容，推送到远程仓库中！
+先在GitHub上新建的一个仓库。为了管理方便，强烈建议：本地仓库与元层仓库同名！ //也就是说，本地的工作区、本地仓库、远程仓库 三者名称一致！“一个名称就是一套体系，不同名称 不同的体系”！
+然后在本地工作目录中，右击->git bash ：
+git remote add 远程仓库别名  远程仓库连接     //绑定远程仓库（只需要操作一次） //注意: GitHub推荐使用SSH链接（虽然 默认的是https链接），SSH更加安全 而且传输效率更高(而且 不再需要每次输入用户名密码)！
+git branch -M 远程仓库分支                    //指定远程仓库分支
+git push -u 远程仓库别名 远程仓库分支         //将本地仓库推送至远程仓库   //妙记：从“架构图”上看 远程仓库在上面，故 -u貌似就是up的意思
+比如：                                                           //其实这几句话，在刚刚新建好GitHub仓库的时候 会默认贴在仓库里的（复制粘贴即可）。                                      
+git remote add origin git@github.com:lionheart21st/test_2.git    //注意：可以看到这个是一个SSH链接 //需要在项目主页上点击SSH按钮，项目链接才会变成SSH连接  //注意：远程仓库的别名是在本地有效的，这里别名叫origin(主要作用，用本地库名称相区别)。其实，该远程仓库的真实名称叫test_2(从SSH链接中可以看出来)（建议远程仓库的真实名称与本地仓库名 即工作区名称一致）。 
+                                                                 //注意：git@github.com:lionheart21st这是一台“远程主机”（可以理解为GitHub的“个人主页”），一台“远程主机”之下可以有很多仓库（GitHub的“个人主页”中可以有很多仓库），注意这个SSH链接后面的“啥啥.git”就是仓库名。//其实，不同的本地仓库 都可以使用别名origin对应远程的仓库，因为不同的本地仓库的“git”应该是隔离的！
+git branch -M main                                               //注意：选择了远程仓库的主分支
+git push -u origin main                      // -u指定远程仓库（通过别名指定，比如origin），远程仓库 后面跟本地分支（比如main）
+                                             //如果，本地仓库与远程仓库 两边本来就已经同步的话，再执行push 则返回“Everything up-to-date”
 
-ע�⣺Ҳ������GitHub����Ŀ��ҳ�� ����ZIPѹ����
+注意：使用SSH链接的前提是要在git基础配置中 配置好公私钥！//注意：绑定远程仓库 只要在第一次推送之前绑定一次，之后 推送的时候 不用再绑定了！
+注意：除非不可能产生“不确定性”，否则不要“只敲git push”，因为不同版本git的“push默认行为”不同！ 
+      如果是个人的仓库“有版本 无分支 一对一（只有一个本地仓库、一个远程仓库）”就没有“不确定性”了，那就可以“只敲git push”!      
+      如果是生产的仓库，至少要-u指定别名（不要推错远程仓库，因为 可能本地仓库连接了多台远程主机）。//git version版本在2.0以上（simple模式），默认推送当前分支到远程仓库
+          比如：git push -u origin  //假设当前本地分支是main（注意看命令行的提示信息），就是将本地的main分支 推送到origin
 
-
-//���ͣ�                             //���������б��زֿ⣬����Զ�ֿ̲⣡�����زֿ�����ݣ����͵�Զ�ֿ̲��У�
-����GitHub���½���һ���ֿ⡣Ϊ�˹������㣬ǿ�ҽ��飺���زֿ���Ԫ��ֿ�ͬ���� //Ҳ����˵�����صĹ����������زֿ⡢Զ�ֿ̲� ��������һ�£���һ�����ƾ���һ����ϵ����ͬ���� ��ͬ����ϵ����
-Ȼ���ڱ��ع���Ŀ¼�У��һ�->git bash ��
-git remote add Զ�ֿ̲����  Զ�ֿ̲�����     //��Զ�ֿ̲⣨ֻ��Ҫ����һ�Σ� //ע��: GitHub�Ƽ�ʹ��SSH���ӣ���Ȼ Ĭ�ϵ���https���ӣ���SSH���Ӱ�ȫ ���Ҵ���Ч�ʸ���(���� ������Ҫÿ�������û�������)��
-git branch -M Զ�ֿ̲��֧                    //ָ��Զ�ֿ̲��֧
-git push -u Զ�ֿ̲���� Զ�ֿ̲��֧         //�����زֿ�������Զ�ֿ̲�   //��ǣ��ӡ��ܹ�ͼ���Ͽ� Զ�ֿ̲������棬�� -uò�ƾ���up����˼
-���磺                                                           //��ʵ�⼸�仰���ڸո��½���GitHub�ֿ��ʱ�� ��Ĭ�����ڲֿ���ģ�����ճ�����ɣ���                                      
-git remote add origin git@github.com:lionheart21st/test_2.git    //ע�⣺���Կ��������һ��SSH���� //��Ҫ����Ŀ��ҳ�ϵ��SSH��ť����Ŀ���ӲŻ���SSH����  //ע�⣺Զ�ֿ̲�ı������ڱ�����Ч�ģ����������origin(��Ҫ���ã��ñ��ؿ�����������)����ʵ����Զ�ֿ̲����ʵ���ƽ�test_2(��SSH�����п��Կ�����)������Զ�ֿ̲����ʵ�����뱾�زֿ��� ������������һ�£��� 
-                                                                 //ע�⣺git@github.com:lionheart21st����һ̨��Զ������������������ΪGitHub�ġ�������ҳ������һ̨��Զ��������֮�¿����кܶ�ֿ⣨GitHub�ġ�������ҳ���п����кܶ�ֿ⣩��ע�����SSH���Ӻ���ġ�ɶɶ.git�����ǲֿ�����//��ʵ����ͬ�ı��زֿ� ������ʹ�ñ���origin��ӦԶ�̵Ĳֿ⣬��Ϊ��ͬ�ı��زֿ�ġ�git��Ӧ���Ǹ���ģ�
-git branch -M main                                               //ע�⣺ѡ����Զ�ֿ̲������֧
-git push -u origin main                      // -uָ��Զ�ֿ̲⣨ͨ������ָ��������origin����Զ�ֿ̲� ��������ط�֧������main��
-                                             //��������زֿ���Զ�ֿ̲� ���߱������Ѿ�ͬ���Ļ�����ִ��push �򷵻ء�Everything up-to-date��
-
-ע�⣺ʹ��SSH���ӵ�ǰ����Ҫ��git���������� ���úù�˽Կ��//ע�⣺��Զ�ֿ̲� ֻҪ�ڵ�һ������֮ǰ��һ�Σ�֮�� ���͵�ʱ�� �����ٰ��ˣ�
-ע�⣺���ǲ����ܲ�������ȷ���ԡ�������Ҫ��ֻ��git push������Ϊ��ͬ�汾git�ġ�pushĬ����Ϊ����ͬ�� 
-      ����Ǹ��˵Ĳֿ⡰�а汾 �޷�֧ һ��һ��ֻ��һ�����زֿ⡢һ��Զ�ֿ̲⣩����û�С���ȷ���ԡ��ˣ��ǾͿ��ԡ�ֻ��git push��!      
-      ����������Ĳֿ⣬����Ҫ-uָ����������Ҫ�ƴ�Զ�ֿ̲⣬��Ϊ ���ܱ��زֿ������˶�̨Զ����������//git version�汾��2.0���ϣ�simpleģʽ����Ĭ�����͵�ǰ��֧��Զ�ֿ̲�
-          ���磺git push -u origin  //���赱ǰ���ط�֧��main��ע�⿴�����е���ʾ��Ϣ�������ǽ����ص�main��֧ ���͵�origin
-
-���⣺
-���زֿ�������ЩԶ�ֿ̲⣺
+另外：
+本地仓库连接哪些远程仓库：
 git remote -v
-git config --list  //���ߣ������漸�о�֪����
+git config --list  //或者，看后面几行就知道了
 
-���Զ�ֿ̲�󶨣�
-git remote rm Զ�ֿ̲����  //���磺git remote rm origin
-
-
+解除远程仓库绑定：
+git remote rm 远程仓库别名  //比如：git remote rm origin
 
 
+//下拉：
+git pull 远程仓库别名  远程分支:本地分支
+比如：
+git pull origin  //从远程仓库的“当前本地分支所对应的分支”下拉到当前本地分支
+注意：有时候会提示：You asked to pull from the remote 'origin',but did not specify a branch...就敲：
+git pull origin master     //保证当前分支是master，即git命令行的“行显示”的圆括号是(master)
+或者
+git pull origin master:master  //效果同上一行，但是返回信息略有不同(不显示具体哪个文件改变了)
 
-//������
-git pull Զ�ֿ̲����  Զ�̷�֧:���ط�֧
-���磺
-git pull origin  //��Զ�ֿ̲�ġ���ǰ���ط�֧����Ӧ�ķ�֧����������ǰ���ط�֧
-ע�⣺��ʱ�����ʾ��You asked to pull from the remote 'origin',but did not specify a branch...���ã�
-git pull origin master     //��֤��ǰ��֧��master����git�����еġ�����ʾ����Բ������(master)
-����
-git pull origin master:master  //Ч��ͬ��һ�У����Ƿ�����Ϣ���в�ͬ(����ʾ�����ĸ��ļ��ı���)
-
-ע�⣺ͬ�ϣ�һ�����زֿ����ͬʱ���Ӷ�̨Զ����������Ҫ��ֻ��git pull�� Ҫ���ⲻȷ���ԣ�//ע�⣺push��pull������������ĵ��� ���������̨Զ�������ĶԻ�����GitHub������Gitee?��
-
+注意：同上，一个本地仓库可能同时连接多台远程主机，不要“只敲git pull” 要避免不确定性！//注意：push、pull会有输入密码的弹窗 看清楚是哪台远程主机的对话框（是GitHub？还是Gitee?）
 
 
-
-//*Զ�̷�֧
-���
-git branch -a  //�鿴������Զ�̵����з�֧��Զ�̷�֧����ɫ�Ǻ�ɫ�ģ������ǡ�·����ʽ����  //ò�ƣ�-a����all����˼
-git push Զ�ֿ̲���� ���ط�֧��   //���ͱ��ط�֧��Զ��
-git push Զ�ֿ̲���� :Զ�̷�֧��  //ɾ��Զ�̷�֧�����ط�֧�������� //�ر�ע�⣺����һ������Ͳ�һ����ð��:��
-git checkout -b �����·�֧�� Զ�ֿ̲����/Զ�̷�֧��   //��ȡԶ��ָ����֧���ڱ��ش�����֧     //checkout -b���������½���֧����˼�������ټ��� Զ�ֿ̲����/Զ�̷�֧������˵����Զ�����½��������ơ�����֧
-���磺
-git branch -a //���أ�leaf01
+//*远程分支
+命令：
+git branch -a  //查看本地与远程的所有分支（远程分支的颜色是红色的，而且是“路径形式”）  //貌似，-a就是all的意思
+git push 远程仓库别名 本地分支名   //推送本地分支到远程
+git push 远程仓库别名 :远程分支名  //删除远程分支（本地分支还保留） //特别注意：与上一个命令就差一个“冒号:”
+git checkout -b 本地新分支名 远程仓库别名/远程分支名   //拉取远程指定分支并在本地创建分支     //checkout -b本身就是新建分支的意思，后面再加上 远程仓库别名/远程分支名，就说明从远程来新建（“复制”）分支
+比如：
+git branch -a //返回：leaf01
                       *main
-                      remoutes/origin/main   //ע�⣺Զ�̷�֧�������Ǻ�ɫ�ģ����ǡ�·����ʽ�� remoutes/Զ�ֿ̲����/Զ�̷�֧��
-git checkout leaf01 //�л���leaf01��֧
-git push origin leaf01  //���ͱ��ط�֧leaf01��Զ�̣���Ϊ���÷�֧�ǵ�һ�����ͣ�����Զ�ֿ̲���½���֧leaf01��//������Զ�ֿ̲⻹û��leaf01��֧
-                        //���أ�To github.com:lionheart21st/test_2.git
+                      remoutes/origin/main   //注意：远程分支不仅字是红色的，而是“路径形式” remoutes/远程仓库别名/远程分支名
+git checkout leaf01 //切换到leaf01分支
+git push origin leaf01  //推送本地分支leaf01到远程（因为，该分支是第一次推送，所以远程仓库会新建分支leaf01）//场景：远程仓库还没有leaf01分支
+                        //返回：To github.com:lionheart21st/test_2.git
                                 *[new branch]     leaf01->leaf01
-                        //����GitHub����Ŀ��ҳ�����Ͻ���һ����������ť��main�������ѡleaf01 �ͽ�����leaf01��֧��//�����������ť����ʾʲô ����Զ�ֿ̲� ����ʲô��֧��
-                                                //�������������ť���ı��� ���ܿ�������֧������Ϊ2
-git checkout main   //�л���main��֧��������main��֧Ҳͬ����Զ��main��֧
-git push -u origin main //ע�⣺���push������������ʵ�εĻ�����һ����Զ�ֿ̲���� �ڶ�����Զ�̷�֧������-u�����Բ��ã������ģ������黹����-u����߿ɶ��ԣ�
-git push -u origin :leaf01  //ɾ��Զ��leaf01��֧     //�ر�ע�⣺���������У����ã���Ϊ��һ��Զ�̷�֧ ���ܲ������Լ�Ҫ�ã�����ҲҪ�ã�
-                            //���أ�To github.com:lionheart21st/test_2.git
+                        //进入GitHub的项目主页，右上角有一个“下拉按钮”main，点击勾选leaf01 就进入了leaf01分支。//这个“下拉按钮”显示什么 就是远程仓库 现在什么分支上
+                                                //在这个“下拉按钮”的边上 还能看到“分支数量”为2
+git checkout main   //切换到main分支，将本地main分支也同步到远程main分支
+git push -u origin main //注意：如果push命令后面跟两个实参的话，第一个是远程仓库别名 第二个是远程分支名，“-u”可以不敲（见上文）。建议还是敲-u（提高可读性）
+git push -u origin :leaf01  //删除远程leaf01分支     //特别注意：生产环境中，慎用！因为，一个远程分支 可能不仅仅自己要用，别人也要用！
+                            //返回：To github.com:lionheart21st/test_2.git
                                     -[deleted]          leaf01
-                            //��GitHub����Ŀ��ҳ�����Կ�������֧������Ϊ2
-git branch -a      //���أ�leaf01   //ע�⣺���Կ��� ���ص�leaf01��֧����
+                            //在GitHub的项目主页，可以看到“分支数量”为2
+git branch -a      //返回：leaf01   //注意：可以看到 本地的leaf01分支还在
                            *main
-                           remotes/origin/main   //�ڱ���Ҳ�ܿ���Զ�̵�leaf01��֧ ��ɾ����
-��GitHub��ҳ�ϣ�����leaf02��֧��
-����Ŀ��ҳ�� ������Ͻǵġ�������ť��main�����Կ���һ�����������ʾ��Find or create a branch��������leaf02 �������ְ�ť��create branch:leaf02 from main������Զ�̵�main��֧ �½�Զ�̵�leaf02��֧
-git branch -a      //���أ�leaf01    //���Կ�������ȻԶ���½�leaf02��֧�������ڱ��ػ�������
+                           remotes/origin/main   //在本地也能看到远程的leaf01分支 被删除了
+在GitHub主页上，创建leaf02分支：
+在项目主页中 点击右上角的“下拉按钮”main，可以看到一个输入框（有提示：Find or create a branch），输入leaf02 下面会出现按钮“create branch:leaf02 from main”即从远程的main分支 新建远程的leaf02分支
+git branch -a      //返回：leaf01    //可以看到，虽然远端新建leaf02分支，但是在本地还看不到
                            *main
-                           remotes/origin/main   //��ʱ��ֻ�ܿ���Զ�̵�main��֧
-git fetch   //��ȡԶ�ֿ̲����µ�״̬
-            //���أ�From github.com:lionheart21st/test_2.git
+                           remotes/origin/main   //此时，只能看到远程的main分支
+git fetch   //读取远程仓库最新的状态
+            //返回：From github.com:lionheart21st/test_2.git
                     *[new branch]   leaf02  -> origin/leaf02
 
-git checkout -b leaf02 origin/leaf02   //��Զ�ֿ̲��leaf02��֧ �½��������ơ��������ص�leaf02��֧      //���������ػ�û��leaf02��֧����ȡԶ�̵�leaf02��֧������
-git branch -a     //���أ�leaf01
-                          *leaf02      //ע�⣺��ʱ�����ط�֧Ҳ�л���leaf02����
+git checkout -b leaf02 origin/leaf02   //从远程仓库的leaf02分支 新建（“复制”）到本地的leaf02分支      //场景：本地还没有leaf02分支，拉取远程的leaf02分支到本地
+git branch -a     //返回：leaf01
+                          *leaf02      //注意：此时，本地分支也切换到leaf02上了
                           main
                           remoutes/origin/leaf02
                           remoutes/origin/main
 
    
-//*Զ�̷�֧��ͻ     //Զ�̷�֧�������漰������Э�������Է�����ͻ�ĸ��� Ҫ�ȱ��ط�֧��ͻ�������Ǳ��ط�֧��һ���˿����ģ�������
-�ڱ��ؿ���������ģ�����Э����
+//*远程分支冲突     //远程分支，往往涉及到多人协作，所以发生冲突的概率 要比本地分支冲突（假设是本地分支是一个人开发的）大许多
+在本地开两个窗口模拟多人协作：
 
-��D���½�һ��Ŀ¼��Ŀ¼���ơ�ģ��ͬ�¡���,�Ҽ�->git bashȻ��
-git clone git@github.com:lionheart21st/test_1.git  //��¡Զ�ֿ̲�test_1
-��ģ��ͬ�¡��Ĳ�����  //ע�⣺git�����еġ�����ʾ�� /d/ģ��ͬ��/test_1(master)
-�ڹ������У��޸��ļ�Markdown�����﷨.txt�����ݣ��ڵ�һ��д�ϡ�ͬ���������ݡ���
-git add Markdown�����﷨.txt
-git commit -m '�������� Markdown�����﷨.txt'
+在D盘新建一个目录（目录名称“模拟同事”）,右键->git bash然后：
+git clone git@github.com:lionheart21st/test_1.git  //克隆远程仓库test_1
+“模拟同事”的操作：  //注意：git命令行的“行显示” /d/模拟同事/test_1(master)
+在工作区中，修改文件Markdown极简语法.txt的内容（在第一行写上“同事添加内容”）
+git add Markdown极简语法.txt
+git commit -m '添加内容 Markdown极简语法.txt'
 
+自己的操作：
+进入工作目录（比如D:\GitWorkSpace），然后 进入项目的工作区（D:\GitWorkSpace\test_1）
+自己的操作：
+在工作区中，修改文件Markdown极简语法.txt的内容（在第一行写上“自己添加内容”）右键->git bash然后：
+注意：git命令行的“行显示” /d/GitWorkSpace/test_1(master)
+git add Markdown极简语法.txt
+git commit -m '添加内容 Markdown极简语法.txt'
+git push -u origin master   //推送至远程仓库
+此时，在GitHub项目主页中 打开文件Markdown极简语法.txt，可以看到 第一行内容为“自己添加内容”
 
-�Լ��Ĳ�����
-���빤��Ŀ¼������D:\GitWorkSpace����Ȼ�� ������Ŀ�Ĺ�������D:\GitWorkSpace\test_1��
-�Լ��Ĳ�����
-�ڹ������У��޸��ļ�Markdown�����﷨.txt�����ݣ��ڵ�һ��д�ϡ��Լ��������ݡ����Ҽ�->git bashȻ��
-ע�⣺git�����еġ�����ʾ�� /d/GitWorkSpace/test_1(master)
-git add Markdown�����﷨.txt
-git commit -m '�������� Markdown�����﷨.txt'
-git push -u origin master   //������Զ�ֿ̲�
-��ʱ����GitHub��Ŀ��ҳ�� ���ļ�Markdown�����﷨.txt�����Կ��� ��һ������Ϊ���Լ��������ݡ�
-
-��ģ��ͬ�¡��Ĳ�����
-git push -u origin master   //���������ͱ��ܾ�
-���أ�
+“模拟同事”的操作：
+git push -u origin master   //报错：推送被拒绝
+返回：
 to github.com:lionheart21st/test_1.git
 ![rejected]       master -> master(fetch first)
 error:failed to push some refs to 'github.com:lioheart21st/test_1.git'
 hint:...
-�����������ģ��ͬ�¡��Ĳ�����:
-git pull origin   //��Զ�ֿ̲���ȡ
-���أ�
+解决方法（“模拟同事”的操作）:
+git pull origin   //从远程仓库拉取
+返回：
 ...
-Auto-merging Markdown�����﷨.txt        //��pull�ķ����У����Կ���������ͻ�ˣ��ҵ����⣺pullû�б���������pull������merge�����ˣ�
-CONFLICT(content):Merge confict in Markdown�����﷨.txt
+Auto-merging Markdown极简语法.txt        //在pull的返回中，可以看到发生冲突了（我的理解：pull没有报错，但是pull连带的merge报错了）
+CONFLICT(content):Merge confict in Markdown极简语法.txt
 Auto-merging failed;:fix conflicts and then commit the result.
 ...
-�ر�ע�⣺��ʱ��git�����еġ�����ʾ����Բ����Ϊ(master|MERGING)  //ӡ֤��mergeʧ��
-git status //��������ɫ�ļ�����
-���롰ģ��ͬ�¡��Ĺ�������˫���򿪳�ͻ�ļ�Markdown�����﷨.txt�����Կ����ļ����� �������Ĳ��֣�
+特别注意：此时，git命令行的“行显示”的圆括号为(master|MERGING)  //印证了merge失败
+git status //看到“红色文件名”
+进入“模拟同事”的工作区，双击打开冲突文件Markdown极简语法.txt，可以看到文件内容 有这样的部分：
 <<<<<<< HEAD
-ͬ����������
+同事添加内容
 =======
-�Լ���������
+自己添加内容
 >>>>>>> 05c01e029c903c591ce38d78c73304c438219bf8
 
-���ⲿ�������ֹ��޸�Ϊ��ͬ�����ӵ�����+�Լ����ӵ�����   //�����У���ͻ���ݵĽ�� Ҫ���������������������Ƕ��˿���������� ��Ҫ��ֹ�ͨ���У���ʱ�� ��ĳĳ�˵Ĵ���Ϊ������ʱ�� Ҫ�����˵Ĵ����ۺ�һ�£�
-git add Markdown�����﷨.txt
-git commit -m '�������� Markdown�����﷨.txt'
-git push -u origin master  //��ʱ�����ͳɹ�
-��ʱ����GitHub��Ŀ��ҳ�� ���ļ�Markdown�����﷨.txt�����Կ��� ��һ������Ϊ��ͬ����������+�Լ��������ݡ�
+将这部分内容手工修改为：同事添加的内容+自己添加的内容   //生产中，冲突内容的解决 要具体问题具体分析，尤其是多人开发法情况下 需要充分沟通才行（有时候 以某某人的代码为主，有时候 要两个人的代码综合一下）
+git add Markdown极简语法.txt
+git commit -m '添加内容 Markdown极简语法.txt'
+git push -u origin master  //此时，推送成功
+此时，在GitHub项目主页中 打开文件Markdown极简语法.txt，可以看到 第一行内容为“同事添加内容+自己添加内容”
 
-�Լ��Ĳ�����
-����git push //����                               
+自己的操作：
+尝试git push //报错                               
 to github.com:lionheart21st/test_1.git
 ![rejected]       master -> master(fetch first)
 error:failed to push some refs to 'github.com:lioheart21st/test_1.git'
 hint:...
 
-������Լ��Ĳ�������
-git pull origin  //��Զ�ֿ̲���ȡ
-���أ�
+解决（自己的操作）：
+git pull origin  //从远程仓库拉取
+返回：
 Fast-forward
- Markdown�����﷨.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)   //���Կ����ļ����޸���
-�����Լ��Ĺ�������˫�����ļ�Markdown�����﷨.txt�����Կ�����һ������Ϊ��ͬ����������+�Լ��������ݡ���
+ Markdown极简语法.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)   //可以看到文件被修改了
+进入自己的工作区，双击打开文件Markdown极简语法.txt，可以看到第一行内容为“同事添加内容+自己添加内容”。
 
 **
-�ر�ע�⣺��������push�Ĵ��� ������ͬ����һ��push���󣬱������µ�commit�汾&Զ��û�� and Զ�����µ�commit�汾&����û�У������ٴ�pull֮�� ��Ҫ����Ϊ��������س�ͻ����Ϊ����ʱgit����֪��������ômerge��
-                                       �ڶ���push���󣬱������µ�commit�汾&Զ���Ѿ����� ͬʱ Զ�̵����°汾&����û�У�����pull֮���Զ�merge���������ļ��Զ����£���Ϊ����ʱgit��֪��������ômerge��
-          С�᣺Զ�̰汾 �� ���ذ汾 �ǡ������ϵ����Զ�̡����ض��С��µ��ύ��������Ҫ�˹�merge��
-                Զ�̰汾 �Ǳ��ذ汾�ġ������������Զ�merge���߰汾���ǵͰ汾����
-ע�⣺��� ֱ����Զ�ֿ̲����ҳ���޸��ļ���Ҳ��������Ƶ�Ӱ�죡
+特别注意：上面两种push的错误 并不相同：第一种push错误，本地最新的commit版本&远程没有 and 远程最新的commit版本&本地没有，所以再次pull之后 还要“人为”解决本地冲突（因为，此时git“不知道”该怎么merge）
+                                       第二种push错误，本地最新的commit版本&远程已经有了 同时 远程的最新版本&本地没有，所以pull之后“自动merge”即本地文件自动更新（因为，此时git“知道”该怎么merge）
+          小结：远程版本 与 本地版本 是“差异关系”（远程、本地都有“新的提交”），需要人工merge。
+                远程版本 是本地版本的“增量”，会自动merge（高版本覆盖低版本）。
+注意：如果 直接在远程仓库的主页上修改文件，也会产生类似的影响！
 
-���飺��push֮ǰ����pull��ѡȷ���Լ��ı��ؿ�����Զ�̿�ͬ���ģ��� �г�ͻ�Ļ����Լ��������
-      ��git pull ���أ�Already up to date.  ��˵�����ؿ���Զ�̿�ͬ���ˣ�
-      Ȼ����push���ͣ�
+经验：在push之前，先pull，选确保自己的本地库是与远程库同步的（即 有冲突的话先自己解决）。
+      即git pull 返回：Already up to date.  就说明本地库与远程库同步了！
+      然后，再push推送！
 
+另外：
+本地git status有红色文件名、绿色文件名，都是可以push成功的！（可能的场景：有的东西已经改好了即commit提交了 而有的东西还在改，所以对于已经提交的部分 是可以push推送的）
+但是，如果本地处于“merge失败状态”即 本地分支有冲突，则push会失败！//本地都有冲突了，怎能不管而推送到远端呢！
 
-���⣺
-����git status�к�ɫ�ļ�������ɫ�ļ��������ǿ���push�ɹ��ģ������ܵĳ������еĶ����Ѿ��ĺ��˼�commit�ύ�� ���еĶ������ڸģ����Զ����Ѿ��ύ�Ĳ��� �ǿ���push���͵ģ�
-���ǣ�������ش��ڡ�mergeʧ��״̬���� ���ط�֧�г�ͻ����push��ʧ�ܣ�//���ض��г�ͻ�ˣ����ܲ��ܶ����͵�Զ���أ�
+另外：
+本地git status有红色文件名、绿色文件名，pull都会失败！（反之，如果pull成功的话，本地的修改 就会丢失）
+解决方法：简单的方法，commit提交变更，或者 如果觉得变更可以丢失的话 那就可以“回到过去”
+          水平高一点方法，stash保存变更 //见上文
 
-���⣺
-����git status�к�ɫ�ļ�������ɫ�ļ�����pull����ʧ�ܣ�����֮�����pull�ɹ��Ļ������ص��޸� �ͻᶪʧ��
-����������򵥵ķ�����commit�ύ��������� ������ñ�����Զ�ʧ�Ļ� �ǾͿ��ԡ��ص���ȥ��
-          ˮƽ��һ�㷽����stash������ //������
-
-
-
-�ر�ע�⣺ÿ�����ϵġ����й��¡����ڿ�ʼ�ɻ�֮ǰ�����������°��ʱ�� �������Ѿ�commit��psuh�ˣ�������Զ�ֿ̲���ʲô�仯
-git fetch Զ�ֿ̲���� Զ�ֿ̲��֧��:tmp   //fetchҲ�Ǵ�Զ����ȡ����pull�Ĳ�ͬ���ڣ�fetch�����Զ�merge //pull�Ļ� Ҫô������merge��ͻ״̬�� Ҫôֱ�Ӱ��ļ����ˣ������е㡰����ȫ�С���
-                                            //fetch�����������pull��һ����
-                                            //�����ȡԶ�ֿ̲�ķ�֧ �������ء������زֿ��tmp��֧�У���� û��tmp��֧ �ͻ��½�һ��tmp��֧��
-                                            //��Ϊ�Ǵ�Զ������������ͬ��ҲҪ�����û�������
-git diff tmp   //����ǰ��֧��tmp��֧�Աȣ�������ʲô��ͬ��
-               //�����û���κβ��죨�� Զ�ֿ̲�û�б仯�����򷵻ؿ�
-����в�ͬ �򷵻� ���磺
-diff --git a/Markdown�����﷨.txt b/Markdown�����﷨.txt   //ʲô�ļ��ұ仯
+特别注意：每天早上的“列行公事”：在开始干活之前（假设昨天下班的时候 工作都已经commit、psuh了），看看远程仓库有什么变化
+git fetch 远程仓库别名 远程仓库分支名:tmp   //fetch也是从远程拉取，与pull的不同在于：fetch不会自动merge //pull的话 要么“陷入merge冲突状态” 要么直接把文件改了，给人有点“不安全感”！
+                                            //fetch的命令参数与pull是一样的
+                                            //这里，拉取远程仓库的分支 并“下载”到本地仓库的tmp分支中（如果 没有tmp分支 就会新建一个tmp分支）
+                                            //因为是从远程下拉，所以同样也要输入用户名密码
+git diff tmp   //将当前分支与tmp分支对比，看看有什么不同。
+               //如果，没有任何差异（即 远程仓库没有变化），则返回空
+如果有不同 则返回 比如：
+diff --git a/Markdown极简语法.txt b/Markdown极简语法.txt   //什么文件右变化
 index f776b52..9ecbb3d 100644
---- a/Markdown�����﷨.txt
-+++ b/Markdown�����﷨.txt
-@@ -1,4 +1,4 @@                        #�Ǽ����б仯
--try+try+try                           #�������Լ��ģ�������Զ�̵ģ�
-+try+try                               #�������Լ��ģ�������Զ�̵ģ�ֱ�ӵ���������˫�����ļ��Ա�һ�� ���ɣ�
- ͬ���ٴ���������+�ٴ��Լ���������
- ͬ����������+�Լ���������+try
- �������ɡ���֧����
+--- a/Markdown极简语法.txt
++++ b/Markdown极简语法.txt
+@@ -1,4 +1,4 @@                        #那几行有变化
+-try+try+try                           #哪行是自己的，哪行是远程的？
++try+try                               #哪行是自己的，哪行是远程的？直接到工作区，双击打开文件对比一下 即可！
+ 同事再次添加内容+再次自己添加内容
+ 同事添加内容+自己添加内容+try
+ 添加主干、分支测试
 
-��ϸ�۲�֮������Ͽɱ仯����ô�ͣ�
-git merge tmp   //����ǰ��֧��tmp��֧�ϲ���������һ��������ǡ����족 �͡�����merge��ͻ״̬�� ��Ҫ�˹�merge������ǡ������������Զ�merge���߰汾���ǵͰ汾����
-git push -u Զ�ֿ̲����  //�ٽ��޸ĺ������ ���͵�Զ�ֿ̲����Ӧ��֧
+仔细观察之后，如果认可变化，那么就：
+git merge tmp   //将当前分支与tmp分支合并，与上文一样，如果是“差异” 就“陷入merge冲突状态” 需要人工merge。如果是“增量”，会自动merge（高版本覆盖低版本）。
+git push -u 远程仓库别名  //再将修改后的内容 推送到远程仓库的相应分支
 
         
 
 
 
-//��ǩ������   //���� ���û��ߡ���ʽ�ķ��а汾���Ĺ���
-���
-git tag  //�鿴���б�ǩ
-git tag �±�ǩ��   //�½���ǩ
-git tag -a �±�ǩ�� -m '������Ϣ' //һ���½���ǩ ��Ҫ����������Ϣ
-git -d tag_name    //ɾ�����ر�ǩ
-git push -u Զ�ֿ̲���� ��ǩ��   //���ͱ�ǩ��Զ�ֿ̲�
-git push Զ�ֿ̲���� --tags  //����ȫ��δ���͵ı�ǩ��Զ�ֿ̲�
-git push :refs/tags/tag_name  //ɾ��һ��Զ�̱�ǩ
+///6标签管理：   //用于 商用或者“正式的发行版本”的管理
+命令：
+git tag  //查看所有标签
+git tag 新标签名   //新建标签
+git tag -a 新标签名 -m '描述信息' //一般新建标签 都要带有描述信息
+git -d tag_name    //删除本地标签
+git push -u 远程仓库别名 标签名   //推送标签到远程仓库
+git push 远程仓库别名 --tags  //推送全部未推送的标签到远程仓库
+git push :refs/tags/tag_name  //删除一个远程标签
 
-���磺
-git tag //���أ����ա� ˵�����ڻ�û�б�ǩ
-git tag -a v_1.0 -m  '����master��֧ ĳ�汾'  //�½���ǩv_1.0
-git tag //���أ�v_1.0
-git tag -a v_1.1 -m  '�޸� ĳbug'      //������ʹ��һ��ʱ��֮�� ��¶��bug��Ȼ�� ���������޸���bug��Ӧ�����µı��ص��ύcommit��
-git tag //���أ�v_1.0
+比如：
+git tag //返回：“空” 说明现在还没有标签
+git tag -a v_1.0 -m  '基于master分支 某版本'  //新建标签v_1.0
+git tag //返回：v_1.0
+git tag -a v_1.1 -m  '修复 某bug'      //场景：使用一段时间之后 暴露了bug，然后 经过开发修复了bug（应该有新的本地的提交commit）
+git tag //返回：v_1.0
                 v_1.1
-git push -u origin v_1.0  //�����ر�ǩ ������Զ�ֿ̲���
-                          //��ʱ����GitHub��Ŀ��ҳ�У���һ�� ���Կ�����1 tag��,��� ���� ��һ��release��ť ����������ѹ����������֮���ѹ�����Կ�����Ŀ������Դ������ļ�
-git push -u --tags   //���Ա�ǩv_1.1Ҳ���͵�Զ�ֿ̲�����
-git push -u origin :refs/tags/v_1.1  //ɾ��Զ�ֿ̲�ı�ǩv_1.1
-git tag -d v_1.1     //ɾ�����ر�ǩ
-git tag //���أ�v_1.0
-git log -1 //���أ����Կ�����ǩ�Ǵ���ĳһ��commit�ύ�İ汾����ġ�����˵����ǩ���ǻ��ڰ汾�ģ�
-�����Ͻ���tag��ǩ�ǡ�commit�汾�ı�ǣ�����˵ ָ��ĳ��commit�汾��ָ�룩��
+git push -u origin v_1.0  //将本地标签 推送至远程仓库中
+                          //此时，在GitHub项目主页中，第一行 可以看到“1 tag”,点击 进入 有一个release按钮 还可以下载压缩包。下载之后解压，可以看到项目的所有源代码和文件
+git push -u --tags   //可以标签v_1.1也推送到远程仓库中了
+git push -u origin :refs/tags/v_1.1  //删除远程仓库的标签v_1.1
+git tag -d v_1.1     //删除本地标签
+git tag //返回：v_1.0
+git log -1 //返回：可以看到标签是打在某一个commit提交的版本上面的。所以说，标签就是基于版本的！
+本质上讲，tag标签是“commit版本的标记（或者说 指向某个commit版本的指针）”
 
-**��ǩ�ع���
-git show v_1.0 //����׼���ع���v_1.0
-               //�ӷ�����Ϣ�У�����commit�汾ID
-git reset --hard �汾ID  //��ʵ���롰�ص���ʷ���汾�����Ĳ�����һ���ģ�
-
-
+**标签回滚：
+git show v_1.0 //假设准备回滚到v_1.0
+               //从返回信息中，复制commit版本ID
+git reset --hard 版本ID  //其实，与“回到历史（版本）”的操作是一样的！
 
 
 
 
 
+///7GitHub与Gitee互为主备        //GitHub的主页 时常打不开（可能psuh pull可以运行成功），但是看不到主页 操作起来还是不方便的！
+//一个本地仓库同时再绑定gitee  
+现在Gitee的主页新建仓库test_1（建议 与本地仓库、GitHub仓库同名），并复制连接地址https://gitee.com/lionheart21st/test_1.git   
+git remote add origin https://gitee.com/lionheart21st/test_1.git  //返回：报错git remote add origin https://gitee.com/lionheart21st/main.git  
+                                                                  //因为origin这个别名已经使用了
 
+git remote add gitee https://gitee.com/lionheart21st/test_1.git  //现在使用别名gitee(一眼就看明白) //我觉得gitee使用https连接比较好（如果使用SSH 就再需要一套秘钥，感觉会与GitHub搞乱）！
 
-//GitHub��Gitee��Ϊ����        //GitHub����ҳ ʱ���򲻿�������psuh pull�������гɹ��������ǿ�������ҳ �����������ǲ�����ģ�
-//һ�����زֿ�ͬʱ�ٰ�gitee  
-����Gitee����ҳ�½��ֿ�test_1������ �뱾�زֿ⡢GitHub�ֿ�ͬ���������������ӵ�ַhttps://gitee.com/lionheart21st/test_1.git   
-git remote add origin https://gitee.com/lionheart21st/test_1.git  //���أ�����git remote add origin https://gitee.com/lionheart21st/main.git  
-                                                                  //��Ϊorigin��������Ѿ�ʹ����
+//推送至Gitee仓库（假设 本地仓库已经与GitHub同步了，现在 再与Gitee同步。相当于GitHub是主 Gitee是备）
+git push -u gitee -f //-f表示 用本地仓库强制刷新远程仓库，因为此时 要本地仓库同步gitee仓库 所以才用-f
+                     //特别注意：在正常的开发过程中，绝对要慎用-f选项（必须是在充分沟通 并且项目组通过的情况下，才能用）
 
-git remote add gitee https://gitee.com/lionheart21st/test_1.git  //����ʹ�ñ���gitee(һ�۾Ϳ�����) //�Ҿ���giteeʹ��https���ӱȽϺã����ʹ��SSH ������Ҫһ����Կ���о�����GitHub���ң���
-
-//������Gitee�ֿ⣨���� ���زֿ��Ѿ���GitHubͬ���ˣ����� ����Giteeͬ�����൱��GitHub���� Gitee�Ǳ���
-git push -u gitee -f //-f��ʾ �ñ��زֿ�ǿ��ˢ��Զ�ֿ̲⣬��Ϊ��ʱ Ҫ���زֿ�ͬ��gitee�ֿ� ���Բ���-f
-                     //�ر�ע�⣺�������Ŀ��������У�����Ҫ����-fѡ��������ڳ�ֹ�ͨ ������Ŀ��ͨ��������£������ã�
-
-//��gitee�ֿ� ����
+//从gitee仓库 下拉
 git pull gitee
-����
-git fetch gitee master:tmp_gitee  //���� ��ǰ���ط�֧Ϊmaster����gitee�ֿ��master��֧���ص����ز�����Ϊtmp_gitee
-git diff tmp_gitee    //�Աȱ��ط�֧ �� Զ�̷�֧
-                      //��� ���ء��ա���˵���뱾�ط�֧ͬ��
-git branch -d tmp_gitee //��ɱȶ�֮��ɾ�����ط�֧tmp_gitee
+或则
+git fetch gitee master:tmp_gitee  //假设 当前本地分支为master，将gitee仓库的master分支下载到本地并命名为tmp_gitee
+git diff tmp_gitee    //对比本地分支 与 远程分支
+                      //如果 返回“空”，说明与本地分支同步
+git branch -d tmp_gitee //完成比对之后，删除本地分支tmp_gitee
+
 
 
 
