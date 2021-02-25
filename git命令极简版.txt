@@ -1,4 +1,4 @@
-///1 基础配置
+﻿///1 基础配置
 查看git版本:
 git --version   //也可以用来查看系统有没有安装git
 
@@ -6,12 +6,12 @@ git客户端“连接”GitHub：
 git config --global user.name  "name"             //你的GitHub登陆名
 git config --global user.email "~~~~~~~~~@qq.com" //你的GitHub注册邮箱
 git config --global --list //查看账户信息
-ssh-keygen -t rsa    //生成秘钥（注意看返回信息，有一个文件夹 保存公钥和私钥）
-                       进去这个文件夹，打开.pub结尾的密钥，这个密钥是公钥，用于外部验证（还有一个私钥，私钥留存）
-                       接下来复制公钥—>登录Github网站—>点击右上角的头像—>setting—>选择SSH and GPG Keys选项—>粘贴你刚刚复制的公钥，保存即可
+ssh-keygen -t rsa     //生成秘钥（注意看返回信息，有一个文件夹 保存公钥和私钥）
+                        进去这个文件夹，打开.pub结尾的密钥，这个密钥是公钥，用于外部验证（还有一个私钥，私钥留存）
+                        接下来复制公钥—>登录Github网站—>点击右上角的头像—>setting—>选择SSH and GPG Keys选项—>粘贴你刚刚复制的公钥，保存即可
 ssh -T git@github.com //检查是否验证成功
 
-git config --list //查看所有的配置信息
+git config --list     //查看所有的配置信息
 
 解决中文乱码：
 git config --global core.quotepath false  //文件名可以使用中文
@@ -33,21 +33,21 @@ git clone “仓库连接”   //会有弹窗要求输入GitHub的用户名密�
 
 增：
 在“项目目录”中 新建一个文件，mytest.txt   //比如，把开发好的一个代码模块 粘贴到“项目目录”中
-git status  //返回信息中，可以看到“Untracke files(文件名 红色字体)”  //Untracke表示 未追踪文件
+git status          //返回信息中，可以看到“Untracke files(文件名 红色字体)”  //Untracke表示 未追踪文件
 git add mytest.txt  //文件名可以tab补全
-git status  //返回信息中，可以看到changs to be committed: new file:文件名（绿色字体）
+git status          //返回信息中，可以看到changs to be committed: new file:文件名（绿色字体）
 git commit -m '添加 mytest.txt'   //-m表示commit的时候附带的信息（一定要有-m，而且消息要有含义 可以帮助事后回忆） //注意：commit成功的返回信息：[分支名 版本id的前七位] 版本名称
-git log   //查看commit是否成功，看最新（最上）日志记录的时间、作者、信息 是否都正确 //英文状态下 按q退出log（大约等待一秒钟）
-git push  //会有弹窗要求输入GitHub的用户名密码 //将文件上传到GitHub的相应仓库中
+git log             //查看commit是否成功，看最新（最上）日志记录的时间、作者、信息 是否都正确 //英文状态下 按q退出log（大约等待一秒钟）
+git push            //会有弹窗要求输入GitHub的用户名密码 //将文件上传到GitHub的相应仓库中
 
 改：
 在“项目目录”中 修改文件，mytest.txt  //也可以，将修改过mytest.txt粘贴覆盖到“项目目录”中
-git status  //返回信息中，可以看到“Changes not staged for commit(文件名 红色字体)”
+git status          //返回信息中，可以看到“Changes not staged for commit(文件名 红色字体)”
 git add mytest.txt  //文件名可以tab补全
-git status  //返回信息中，可以看到changs to be committed: new file:文件名（绿色字体）
+git status          //返回信息中，可以看到changs to be committed: new file:文件名（绿色字体）
 git commit -m '修改 mytest.txt 第一次'   //-m表示commit的时候附带的信息（一定要有-m，而且消息要有含义 可以帮助事后回忆）//注意：commit成功的返回信息：[分支名 版本id的前七位] 版本名称
-git log   //查看commit是否成功，看最新（最上）日志记录的时间、作者、信息 是否都正确 //英文状态下 按q退出log（大约等待一秒钟）
-git push  //会有弹窗要求输入GitHub的用户名密码 //将文件“更新到”GitHub的相应仓库中
+git log       //查看commit是否成功，看最新（最上）日志记录的时间、作者、信息 是否都正确 //英文状态下 按q退出log（大约等待一秒钟）
+git push      //会有弹窗要求输入GitHub的用户名密码 //将文件“更新到”GitHub的相应仓库中
 
 删：
 在GitHub的仓库中，点击要删除的文件，进入文件修改页 点击小图标“垃圾桶”进入commit页，点击绿色按钮“Commit changes”。
@@ -70,7 +70,7 @@ git log   //此时，可以看到“最新的日志”（即删除文件的日�
 ///3原理（极简）：
 工作区：简单理解为电脑的本地目录（就是上文中的“项目目录”）   //git status看到的 红色文件名，就是工作区中的文件 //新建的文件、修改的文件、拷贝过来的文件，都在工作区中！
 暂存区：git add命令将文件添加到暂存区（也称缓冲区 ）           //git status看到的 绿色文件名，就是暂存区中的文件 //如何查看暂存区中的文件？使用git ls-files查看
-本地仓库：其实就是工作区中的隐藏目录“.git目录” //像svn这类集中式版本控制 是没有本地仓库的！ //本地仓库中有哪些文件？使用git ls-tree --full-tree -r --name-only HEAD查看 //如果 暂存区与本地仓库是一致的（git status返回“nothing to commit”）那么 这两个命令看到的内容应该是一样的！
+本地仓库：其实就是工作区中的隐藏目录“.git目录”    //像svn这类集中式版本控制 是没有本地仓库的！ //本地仓库中有哪些文件？使用git ls-tree --full-tree -r --name-only HEAD查看 //如果 暂存区与本地仓库是一致的（git status返回“nothing to commit”）那么 这两个命令看到的内容应该是一样的！
 
 git工作流程：
 在工作区中新建或修改一个文件，然后git add将这个文件添加到暂存区，然后再通过commit将文件提交到本地仓库！
@@ -91,7 +91,7 @@ git init   //初始化本地仓库，其实就是在当前目录中新建一个�
 
 
 //
-文件的增、改操作同上文
+文件的增、改的操作同上文
 
 
 //
@@ -116,11 +116,11 @@ git reset HEAD -- 文件名 //文件名可以tab补全  //注意：“撤销”�
 //
 git log简化输出：
 git log -5    //只输出最新的5行
-git long -5 --pretty=oneline   //--pretty=oneline简化了每条日志的信息，一行一条日志
+git log -5 --pretty=oneline   //--pretty=oneline简化了每条日志的信息，一行一条日志
 
 
 //
-版本回退（回到过去）：          //注意：一次commit相当于产生一个版本，一个log对应着一个版本（可以理解为一个“记录保存”）
+版本回退（回到过去）：        //注意：一次commit相当于产生一个版本，一个log对应着一个版本（可以理解为一个“记录保存”）
 git reset --hard HEAD^  //注意：HEAD右上角一个“上尖号”表示回退一个log  //一般，版本回退 对应着“log简化输出”敲，算清楚回退几个log
                         //注意：与撤销文件暂存一样 都是用的git reset 区别在于 --hard
                         //特别注意：要理解回退的意思，比如HEAD^^^,回退三个log。假如log的“逆序 是aaa,bbb,ccc”，那么就是回退到ccc。而且，此时git log看不到aaa和bbb了（其实 aaa和bbb没有消失，还在）！
@@ -135,12 +135,12 @@ git reset --hard 日志ID（7位以上即可） //注意：如果日志ID写的�
 git reflog  //reflog查看所有的操作记录(包括commit记录) //log看到就是commit记录（而且只到“当前版本”，看不到“当前版本的未来版本”），log是看不到reset操作记录的！
             //注意：reflog的记录ID都是7位的，reflog的记录都有操作关键字 比如reset、commit，其中commit的记录 就对应着“版本”
 
-更加reflog返回的信息，确定所要回到的“未来版本”的相应记录ID，再敲：
+根据reflog返回的信息，确定所要回到的“未来版本”的相应记录ID，再敲：
 git reset --hard 记录ID（7位）
 
 
 //
-文件（误删）恢复：          //特别注意：可以恢复的前提，本地仓库中 要有这个文件。
+文件（误删）恢复：          //特别注意：可以恢复的前提：本地仓库中 要有这个文件。
 
 假设文件已经提交到本地仓库，然而 不小心 在工作区中将文件删除了（比如 在目录中 右击文件-->删除）
 此时：
@@ -151,7 +151,7 @@ git checkout -- 文件名  //恢复误删除的文件
 git status返回“noting to commit,working tree clean”
 
 
-//恢复某个文件的历史版本：     //注意：如果使用reset --hard回到历史版本，那么所有文件回去了！现在，只要某一个回到过去 其他文件不变！
+//恢复某个文件的历史版本：     //注意：如果使用reset --hard“回到过去”，那么所有文件都回去了！而现在，只要某一个回到过去 其他文件不变！
 git log //查看历史版本，确定需要恢复哪个历史版本中的文件 并复制该历史版本的id
 git checkout 历史版本的id -- 文件名    //恢复了某个文件的历史版本
 如果发现“恢复的不对”，还可以将文件切换到当前版本：
@@ -162,7 +162,7 @@ git checkout 当前版本的id -- 文件名    //恢复到某个文件的当前�
 文件删除（从本地仓库删除）：
 
 假设文件已经提交到本地仓库，现在需要 将该文件删除
-git ls-files  //查看本地仓库中的文件（假设 本地仓库与暂存区是一致的） //如果，较真要看本底仓库中的文件的话，git ls-tree --full-tree -r --name-only HEAD  
+git ls-files  //查看本地仓库中的文件（假设 本地仓库与暂存区是一致的） //如果，较真要看本地仓库中的文件的话，git ls-tree --full-tree -r --name-only HEAD  
 git rm 文件名 //将文件从本地仓库中 删除，同时也从暂存区、工作区中删除 //如果，文件名不在本地仓库中，报错fatal :pathspec '啥啥啥'did not match any files. 
 git ls-files  //此时，已经看不到 被删除文件的文件名了(说明文件从暂存区删除了) //git ls-tree --full-tree -r --name-only HEAD 也看不到 被删除文件的文件名了 //该命令有点长，其实 当暂存区文件都提交之后，暂存区的文件 与 仓库中的文件 是一样的！所以，此时可以用ls-files“看”仓库中的文件！
 
@@ -188,10 +188,10 @@ git commit -m '重命名文件为啥啥啥'
 
 //*分支
 一般主分支master用于上线（生产），一般不会直接在主分支上开发的。      //特别注意：不怎么恰当的比方，仓库是“物理”的 分支是“逻辑”的（或者说 分支就是“虚拟出来的仓库”）
-一般在会从主干上拉去一个分支（比如叫dev）,然后 就在这个dev分支上开发。经过测试，确定没有问题之后 再将dev分支合并到主分支上！
+一般在会从主干上拉取一个分支（比如叫dev）,然后 就在这个dev分支上开发。经过测试，确定没有问题之后 再将dev分支合并到主分支上！
 命令：
 git checkout 分支名          //切换到指定分支
-git checkout -b 新分支名     //新建分支，并切换到新分支(新分支复制了当前分支的内容） //-b 貌似就是brach的意思    //默认 从当前分支新建（“复制”）新分支
+git checkout -b 新分支名     //新建分支，并切换到新分支(新分支复制了当前分支的内容） //-b 貌似就是brach的意思  //默认 从当前分支新建（“复制”）新分支
 git checkout -d 分支名       //删除指定分支             //-d 貌似就是delete的意思
 git branch                   //查看所有分支，*星号表示当前所在分支（当前分支是绿色的）
 git merge branch             //合并分支    //特别注意：只能在主干上合并分支，不能在分支上合并主干！
@@ -229,7 +229,7 @@ git branch -d leaf001   //删除分支leaf001
 git branch    //返回信息：*main
 
 
-特别注意：git命令行的“行显示（每次敲命令的上一行 都会有行显示）”的后面两个字段内容特别重要：工作区绝对路径 (当前分支名称)
+特别注意：git命令行的“行显示（每次敲命令的上一行 都会有行显示）”的后面两个字段内容特别重要：工作区绝对路径和(当前分支名称)
 需要特别敏感：当前操作的对象是谁（是哪个仓库？哪个分支？），每次回车之前 都再检查一下！   注意：工作区的名称 就仓库的名称
 
 特别注意：当git status有红色文件名、绿色文件名时，切换分支会失败！
@@ -254,6 +254,7 @@ git status //返回：红色文件名 //与刚开始一样（不管一开始是�
       就最简单的使用stash，即 有红绿文件名导致不能切换分支时&又需要切换分支的时候 “保存工作”切换分支，然后切换回来之后 “恢复工作&清楚保存”！ 
 
 
+
 //*分支冲突  //在项目开发过程中，对“不同分支的同名文件”进行修改后再合并时，就会出现文件修改冲突 //貌似，git的判断机制：同一个文件的相同行 内容不一样，就判定为冲突
 git branch   //返回：leaf01
                      *master
@@ -264,7 +265,7 @@ git commit -m '通过主干测试 Markdown极简语法'
 git checkout leaf01  //切换到分支leaf01
 在工作区中，修改文件Markdown极简语法.txt的内容（在第一行写上“通过分支测试”）  //在修改之前，最好先“右键--刷新”
 git add Markdown极简语法.txt
-git commit -m '通过主干测试 Markdown极简语法'
+git commit -m '通过分支测试 Markdown极简语法'
 
 git checkout master  //切换到分支master
 git merge leaf01     //主干合并leaf01分支
@@ -286,7 +287,7 @@ git checkout leaf01
 到工作区中，双击打开文件，可以看到文件的第一行 还是“通过分支测试”  //也就是说 分支中的同名文件 并没有受到“冲突处理”的影响！
 
 git log --graph --pretty=oneline  //--graph 用“点线图”的形式 展示 合并冲突分支
-
+                                  
 
 
 
@@ -304,7 +305,7 @@ git clone 项目仓库连接   //在项目主页上拷贝项目仓库连接，cl
 
 
 //推送：                             //场景：先有本地仓库，再有远程仓库！将本地仓库的内容，推送到远程仓库中！
-先在GitHub上新建的一个仓库。为了管理方便，强烈建议：本地仓库与元层仓库同名！ //也就是说，本地的工作区、本地仓库、远程仓库 三者名称一致！“一个名称就是一套体系，不同名称 不同的体系”！
+先在GitHub上新建的一个仓库。为了管理方便，强烈建议：本地仓库与远程仓库同名！ //也就是说，本地的工作区、本地仓库、远程仓库 三者名称一致！“一个名称就是一套体系，不同名称 不同的体系”！
 然后在本地工作目录中，右击->git bash ：
 git remote add 远程仓库别名  远程仓库连接     //绑定远程仓库（只需要操作一次） //注意: GitHub推荐使用SSH链接（虽然 默认的是https链接），SSH更加安全 而且传输效率更高(而且 不再需要每次输入用户名密码)！
 git branch -M 远程仓库分支                    //指定远程仓库分支
@@ -384,9 +385,10 @@ git branch -a     //返回：leaf01
                           remoutes/origin/leaf02
                           remoutes/origin/main
 
-   
+ 
+  
 //*远程分支冲突     //远程分支，往往涉及到多人协作，所以发生冲突的概率 要比本地分支冲突（假设是本地分支是一个人开发的）大许多
-在本地开两个窗口模拟多人协作：
+在本地开两个窗口模拟多人协作（进行实验）：
 
 在D盘新建一个目录（目录名称“模拟同事”）,右键->git bash然后：
 git clone git@github.com:lionheart21st/test_1.git  //克隆远程仓库test_1
@@ -435,6 +437,7 @@ git commit -m '添加内容 Markdown极简语法.txt'
 git push -u origin master  //此时，推送成功
 此时，在GitHub项目主页中 打开文件Markdown极简语法.txt，可以看到 第一行内容为“同事添加内容+自己添加内容”
 
+
 自己的操作：
 尝试git push //报错                               
 to github.com:lionheart21st/test_1.git
@@ -451,15 +454,17 @@ Fast-forward
 进入自己的工作区，双击打开文件Markdown极简语法.txt，可以看到第一行内容为“同事添加内容+自己添加内容”。
 
 **
-特别注意：上面两种push的错误 并不相同：第一种push错误，本地最新的commit版本&远程没有 and 远程最新的commit版本&本地没有，所以再次pull之后 还要“人为”解决本地冲突（因为，此时git“不知道”该怎么merge）
+特别注意：上面两种push的错误 并不相同：第一种push错误，本地最新的commit版本&远程没有 and 远程最新的commit版本&本地没有，所以pull之后 还要“人为”解决本地冲突（因为，此时git“不知道”该怎么merge）
                                        第二种push错误，本地最新的commit版本&远程已经有了 同时 远程的最新版本&本地没有，所以pull之后“自动merge”即本地文件自动更新（因为，此时git“知道”该怎么merge）
           小结：远程版本 与 本地版本 是“差异关系”（远程、本地都有“新的提交”），需要人工merge。
                 远程版本 是本地版本的“增量”，会自动merge（高版本覆盖低版本）。
-注意：如果 直接在远程仓库的主页上修改文件，也会产生类似的影响！
+注意：如果 直接在远程仓库的项目主页上修改文件，也会产生类似的影响！
 
 经验：在push之前，先pull，选确保自己的本地库是与远程库同步的（即 有冲突的话先自己解决）。
       即git pull 返回：Already up to date.  就说明本地库与远程库同步了！
       然后，再push推送！
+
+
 
 另外：
 本地git status有红色文件名、绿色文件名，都是可以push成功的！（可能的场景：有的东西已经改好了即commit提交了 而有的东西还在改，所以对于已经提交的部分 是可以push推送的）
@@ -470,6 +475,7 @@ Fast-forward
 解决方法：简单的方法，commit提交变更，或者 如果觉得变更可以丢失的话 那就可以“回到过去”
           水平高一点方法，stash保存变更 //见上文
 
+**
 特别注意：每天早上的“列行公事”：在开始干活之前（假设昨天下班的时候 工作都已经commit、psuh了），看看远程仓库有什么变化
 git fetch 远程仓库别名 远程仓库分支名:tmp   //fetch也是从远程拉取，与pull的不同在于：fetch不会自动merge //pull的话 要么“陷入merge冲突状态” 要么直接把文件改了，给人有点“不安全感”！
                                             //fetch的命令参数与pull是一样的
@@ -499,31 +505,31 @@ git push -u 远程仓库别名  //再将修改后的内容 推送到远程仓库
 
 ///6标签管理：   //用于 商用或者“正式的发行版本”的管理
 命令：
-git tag  //查看所有标签
+git tag            //查看所有标签
 git tag 新标签名   //新建标签
 git tag -a 新标签名 -m '描述信息' //一般新建标签 都要带有描述信息
 git -d tag_name    //删除本地标签
 git push -u 远程仓库别名 标签名   //推送标签到远程仓库
-git push 远程仓库别名 --tags  //推送全部未推送的标签到远程仓库
-git push :refs/tags/tag_name  //删除一个远程标签
+git push 远程仓库别名 --tags      //推送全部未推送的标签到远程仓库
+git push :refs/tags/tag_name      //删除一个远程标签
 
 比如：
-git tag //返回：“空” 说明现在还没有标签
+git tag             //返回：“空” 说明现在还没有标签
 git tag -a v_1.0 -m  '基于master分支 某版本'  //新建标签v_1.0
-git tag //返回：v_1.0
-git tag -a v_1.1 -m  '修复 某bug'      //场景：使用一段时间之后 暴露了bug，然后 经过开发修复了bug（应该有新的本地的提交commit）
-git tag //返回：v_1.0
-                v_1.1
+git tag             //返回：v_1.0
+git tag -a v_1.1 -m  '修复 某bug'  //场景：使用一段时间之后 暴露了bug，然后 经过开发修复了bug（应该有新的本地的提交commit）
+git tag             //返回：v_1.0
+                            v_1.1
 git push -u origin v_1.0  //将本地标签 推送至远程仓库中
                           //此时，在GitHub项目主页中，第一行 可以看到“1 tag”,点击 进入 有一个release按钮 还可以下载压缩包。下载之后解压，可以看到项目的所有源代码和文件
-git push -u --tags   //可以标签v_1.1也推送到远程仓库中了
+git push -u --tags        //可以看到 标签v_1.1也推送到远程仓库中了
 git push -u origin :refs/tags/v_1.1  //删除远程仓库的标签v_1.1
-git tag -d v_1.1     //删除本地标签
-git tag //返回：v_1.0
-git log -1 //返回：可以看到标签是打在某一个commit提交的版本上面的。所以说，标签就是基于版本的！
+git tag -d v_1.1          //删除本地标签
+git tag            //返回：v_1.0
+git log -1         //返回：可以看到标签是打在某一个commit提交的版本上面的。所以说，标签就是基于版本的！
 本质上讲，tag标签是“commit版本的标记（或者说 指向某个commit版本的指针）”
 
-**标签回滚：
+*标签回滚：
 git show v_1.0 //假设准备回滚到v_1.0
                //从返回信息中，复制commit版本ID
 git reset --hard 版本ID  //其实，与“回到历史（版本）”的操作是一样的！
@@ -532,13 +538,13 @@ git reset --hard 版本ID  //其实，与“回到历史（版本）”的操作
 
 
 
-///7GitHub与Gitee互为主备        //GitHub的主页 时常打不开（可能psuh pull可以运行成功），但是看不到主页 操作起来还是不方便的！
+///7 GitHub与Gitee互为主备        //GitHub的主页 有时打不开（可能psuh pull倒是可以运行成功），但是看不到主页 操作起来还是不方便的！
 //一个本地仓库同时再绑定gitee  
-现在Gitee的主页新建仓库test_1（建议 与本地仓库、GitHub仓库同名），并复制连接地址https://gitee.com/lionheart21st/test_1.git   
+先在Gitee的主页新建仓库test_1（建议 与本地仓库、GitHub仓库同名），并复制连接地址https://gitee.com/lionheart21st/test_1.git   
 git remote add origin https://gitee.com/lionheart21st/test_1.git  //返回：报错git remote add origin https://gitee.com/lionheart21st/main.git  
                                                                   //因为origin这个别名已经使用了
 
-git remote add gitee https://gitee.com/lionheart21st/test_1.git  //现在使用别名gitee(一眼就看明白) //我觉得gitee使用https连接比较好（如果使用SSH 就再需要一套秘钥，感觉会与GitHub搞乱）！
+git remote add gitee https://gitee.com/lionheart21st/test_1.git   //现在使用别名gitee(一眼就看明白) //我觉得gitee使用https连接比较好（如果使用SSH 就再需要一套秘钥，感觉会与GitHub搞乱）！
 
 //推送至Gitee仓库（假设 本地仓库已经与GitHub同步了，现在 再与Gitee同步。相当于GitHub是主 Gitee是备）
 git push -u gitee -f //-f表示 用本地仓库强制刷新远程仓库，因为此时 要本地仓库同步gitee仓库 所以才用-f
@@ -546,10 +552,10 @@ git push -u gitee -f //-f表示 用本地仓库强制刷新远程仓库，因为
 
 //从gitee仓库 下拉
 git pull gitee
-或则
+或者
 git fetch gitee master:tmp_gitee  //假设 当前本地分支为master，将gitee仓库的master分支下载到本地并命名为tmp_gitee
-git diff tmp_gitee    //对比本地分支 与 远程分支
-                      //如果 返回“空”，说明与本地分支同步
+git diff tmp_gitee      //对比本地分支 与 远程分支
+                        //如果 返回“空”，说明与本地分支同步
 git branch -d tmp_gitee //完成比对之后，删除本地分支tmp_gitee
 
 
