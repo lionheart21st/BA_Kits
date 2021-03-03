@@ -1,1 +1,3 @@
+该模块基于百度智能云开发  //需要 pip install baidu-aip
+
 注意：代码反复运行的时候，Excel文档需要关闭（否则 代码写Excel失败）
