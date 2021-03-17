@@ -99,6 +99,16 @@ content="""
         <img src='cid:imageid6' alt='imageid2'>
         <p>KMeans_2_2</p>          
         <img src='cid:imageid7' alt='imageid2'>
+        <p>日PV</p>          
+        <img src='cid:imageid8' alt='imageid2'>
+        <p>日UV</p>          
+        <img src='cid:imageid9' alt='imageid2'>
+        <p>每小时PV</p>          
+        <img src='cid:imageid10' alt='imageid2'>
+        <p>每小时UV</p>          
+        <img src='cid:imageid11' alt='imageid2'>
+        <p>用户行为漏斗</p>          
+        <img src='cid:imageid12' alt='imageid2'>
     </body>
 </html>
 """
@@ -114,6 +124,11 @@ image_path={
     ,"imageid5":"./KMeans_1_2.png"
     ,"imageid6":"./KMeans_2_1.png"
     ,"imageid7":"./KMeans_2_2.png"
+    ,"imageid8":"./日PV.png"
+    ,"imageid9":"./日UV.png"
+    ,"imageid10":"./每小时PV.png"
+    ,"imageid11":"./每小时UV.png"
+    ,"imageid12":"./用户行为漏斗.png"
 
 }
 
@@ -129,7 +144,8 @@ subject= '邮件自动发送'
 #抄送列表
 acc_to=["237725015@qq.com"]
 #附件列表
-att_file=["./线性回归.png","./K近邻.png","./K近邻_鸠尾花.png","./KMeans_1_1.png","./KMeans_1_2.png","./KMeans_2_1.png","./KMeans_2_2.png","./线性回归.py","./K近邻.py","./K近邻_鸠尾花.py","./KMeans.py"]  #注意：这里的图片是附件图片，与正文图片 即“html页”中嵌入图片，是两回事！
+att_file=["./线性回归.png","./K近邻.png","./K近邻_鸠尾花.png","./KMeans_1_1.png","./KMeans_1_2.png","./KMeans_2_1.png","./KMeans_2_2.png","./线性回归.py","./K近邻.py","./K近邻_鸠尾花.py","./KMeans.py"
+          ,"./日PV.png","./日UV.png","./每小时PV.png","./每小时UV.png","./用户行为漏斗.png"]  #注意：这里的图片是附件图片，与正文图片 即“html页”中嵌入图片，是两回事！
 #“显示”发件人名称
 from_name='来恩哈特189'
 
