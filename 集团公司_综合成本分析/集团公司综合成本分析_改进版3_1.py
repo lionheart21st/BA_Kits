@@ -4,7 +4,7 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 
-path=r'C:\Users\Administrator\PycharmProjects\Greedy_Data\BA_kits\智能填充+行转列透视\source_data'
+path=r'C:\Users\Administrator\PycharmProjects\Greedy_Data\BA_kits\综合成本分析_批量递归读取报销数据_绘制柱状图对比分析\source_data'
 
 final_df_data = pd.DataFrame()  #声明一个空数据帧  #声明全局变量，方便递归函数传递数据
 handle_file_list = []           #声明一个空列表    #声明全局变量，方便递归函数传递数据
@@ -89,7 +89,7 @@ def fill_nan_line(df_cost):   #实现 “半空行”的智能填充
 
     df_cost['报销日期']=df_cost['报销日期'].astype("str")  #如果“时间类型数据”不做类型转换的话，数据写入Excel之后 Excel会自动加上“时分秒”（都是0 不好看）
     # print(df_cost)
-    df_cost.to_excel(r'C:\Users\Administrator\PycharmProjects\Greedy_Data\BA_kits\智能填充+行转列透视\报销汇总.xlsx',index=False)
+    df_cost.to_excel(r'C:\Users\Administrator\PycharmProjects\Greedy_Data\BA_kits\综合成本分析_批量递归读取报销数据_绘制柱状图对比分析\报销汇总.xlsx',index=False)
 
     return df_cost
 
@@ -208,6 +208,8 @@ single_bar(list(s2.index),list(s2.values),fig_title="各种科目的总成本的
 print("===========================================================================================")
 #将多柱图（分组柱图）的绘制过程 封装为 多柱（分组柱图）绘制函数
 #从下面函数的定义就能看出：多柱图（分组柱图）的绘制 要比 单柱图 复杂得多
+#简单讲：多柱图（分组柱图）就是 一个x_data(列表) 对齐 多个y_data(列表)  //单柱图，是 一个x_data(列表) 对齐 一个y_data(列表)
+#      在绘制多柱图（分组柱图）之前的 数据预处理部分，就是为了实现“一个x_data(列表) 对齐 多个y_data(列表)”！
 
 #要对比 每家工厂的各种科目的费用，就需要 使用多柱图（分组柱图） //一家工厂 对应 一组柱子
 # print(list(df_cost.groupby(["报销单位","报销科目"])))                 #对两个字段进行分组
