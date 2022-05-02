@@ -6,12 +6,12 @@ from sqlalchemy import create_engine
 import pymysql
 
 db = pymysql.connect(
-    host = 'localhost',
+    host = '',
     port = 3306,
-    user = 'root',
-    password = 'Coco123456!',
+    user = '',
+    password = '',
     charset = 'utf8',
-    database = 'coco_test'
+    database = ''
 )
 
 cur = db.cursor()
