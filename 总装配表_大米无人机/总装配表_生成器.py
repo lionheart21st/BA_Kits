@@ -19,7 +19,7 @@ engine = create_engine('mysql+pymysql://root:Coco123456!@localhost:3306/coco_tes
 
 
 
-path = r"C:\Users\Dell\PycharmProjects\pythonProject3\[营运部]\门店物料成本\大米无人机"    #为了方便调试，可以将path赋值为当前路径，把该代码模块 放到图片的相同目录中 运行即可
+path = r"C:\Users\Dell\PycharmProjects\pythonProject3\总装配表_大米无人机"    #为了方便调试，可以将path赋值为当前路径，把该代码模块 放到图片的相同目录中 运行即可
 # path=input("请输入路径：")
 # print(os.listdir(path))   #查看目标目录下的文件
 
