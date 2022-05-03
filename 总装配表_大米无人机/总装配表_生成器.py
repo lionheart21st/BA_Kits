@@ -6,12 +6,12 @@ from sqlalchemy import create_engine
 import pymysql
 
 db = pymysql.connect(
-    host = '',
+    host = 'localhost',
     port = 3306,
-    user = '',
-    password = '',
+    user = 'root',
+    password = 'Coco123456!',
     charset = 'utf8',
-    database = ''
+    database = 'coco_test'
 )
 
 cur = db.cursor()
@@ -19,7 +19,7 @@ engine = create_engine('mysql+pymysql://root:@localhost:3306/coco_test?charset=u
 
 
 
-path = r"C:\Users\Dell\PycharmProjects\pythonProject3\总装配表_大米无人机"    #为了方便调试，可以将path赋值为当前路径，把该代码模块 放到图片的相同目录中 运行即可
+path = r"C:\Users\Dell\PycharmProjects\pythonProject3\[营运部]\门店物料成本\大米无人机"    #为了方便调试，可以将path赋值为当前路径，把该代码模块 放到图片的相同目录中 运行即可
 # path=input("请输入路径：")
 # print(os.listdir(path))   #查看目标目录下的文件
 
@@ -37,7 +37,7 @@ def get_all_product_data(path):
                 # print(path+"/"+filename+".xlsx")
                 df1 = pd.read_excel(path+"/"+filename+".xlsx")   #不处理 合并单元格
                 df_data1=pd.concat([df_data1,df1])
-                df2 = pd.read_excel(path+"/"+filename+".xlsx").fillna(method='pad')  #fillna(method='pad')处理“合并单元格”
+                df2 = pd.read_excel(path+"/"+filename+".xlsx").fillna(method='pad')  #fillna(method='pad')处理“合并单元格” 
                 df_data2=pd.concat([df_data2,df2])
     print(df_data1)
     print(df_data2)
@@ -65,33 +65,36 @@ def get_all_product_data(path):
     )"""
 
     cur.execute("drop table if exists 产品_配件表")
-    cur.execute(sql_1)
+    cur.execute(sql_1) 
     return 0
 
 
+
 #批量拼接(部分)SQL语句，为行转列做准备
-def generate_spec_codes_pre():
+def generate_spec_codes_pre():  #pre表示预处理，这里的含义就是生成部分的SQL语句(即case_when_聚合)  
     sql1="""create table 产品_配件_字符串 (
     with table1 as (  -- 产品_配件表的所有配件种类
     select distinct 配件  
     from 产品_配件表 
     ) 
-    select concat(',max(case when 配件="',配件,'"then 规格 else 0 end) as'," ",'"',配件,'"') as 字符串   -- 批量拼接SQL(case_when_聚合)语句 为行转列做准备 #每种配件都有一行“字符串”
+    select concat(',max(case when 配件="',配件,'"then 规格 else 0 end) as'," ",'"',配件,'"') as 字符串   -- 批量拼接SQL(case_when_聚合)语句 为行转列做准备 #每种配件都有一行“字符串”  
     from table1 
     )"""
     cur.execute("drop table if exists 产品_配件_字符串")
-    cur.execute(sql1)
-    cur.execute("select * from 产品_配件_字符串")
+    cur.execute(sql1) #在数据库中建立了一张 产品_配件_字符串
+    cur.execute("select * from 产品_配件_字符串") #将该表的查询结果 保留出来，赋值给变量semi_sql_codes(该变量的类型是元组)
     semi_sql_codes = cur.fetchall() #将批量拼接的字符串 保存到 元组semi_sql_codes中
-    # print(semi_sql_codes)
+    print(semi_sql_codes)
     # print(type(semi_sql_codes)) #<class 'tuple'>
     return semi_sql_codes
 
-#生成指定规格的产品_配件表，如 产品_配件_标准版、产品_配件_畅飞版、产品_配件_至尊版
-def generate_product_spec_data(spec,semi_sql_codes): #形参spec是specification的缩写 表示规格
-    spec_words=" "+spec+" "
 
-    sql_s1 = "create table 产品_配件_"+spec+" ( select 产品,\""+spec+"\" as 规格"  #spec是specification的缩写 表示规格
+
+#生成指定规格的产品_配件表，如 产品_配件_标准版、产品_配件_畅飞版、产品_配件_至尊版
+def generate_product_spec_data(spec,semi_sql_codes): #形参spec是specification的缩写 表示规格    
+    spec_words=" "+spec+" "   #代入实参就是具体规格(比如：标准版、畅飞版、至尊版)
+
+    sql_s1 = "create table 产品_配件_"+spec+" ( select 产品,\""+spec+"\" as 规格"  #spec是specification的缩写 表示规格  
     # print(sql_s1)
 
     sql_s = ""
@@ -99,7 +102,7 @@ def generate_product_spec_data(spec,semi_sql_codes): #形参spec是specification
     while i < len(semi_sql_codes ):
         code_i=semi_sql_codes[i][0]
         # print(code_i)
-        code_i=re.sub(" 规格 ",spec_words,code_i)
+        code_i=re.sub(" 规格 ",spec_words,code_i)  #通过正则替换，将“抽象的规格” 替换为 “具体的规格(由实参决定)”  
         # print(code_i)
         sql_s = sql_s + code_i
         # print(sql_s + code_i)
@@ -111,30 +114,30 @@ def generate_product_spec_data(spec,semi_sql_codes): #形参spec是specification
     group by 产品
     )"""
     #
-    s_sql = sql_s1 + sql_s + sql_s2
+    s_sql = sql_s1 + sql_s + sql_s2  #拼接出的完整的建表语句
     # print(s_sql)
     cur.execute("drop table if exists " + "产品_配件_" + spec)
-    cur.execute(s_sql)
-	return 0
+    cur.execute(s_sql)  
+    return 0
 
 #生成不同规格的产品_配件表(如 产品_配件_标准版、产品_配件_畅飞版、产品_配件_至尊版),并且合并为 产品_配件_规格_总表
-def generate_data_union(spec_list,semi_sql_codes):
+def generate_data_union(spec_list,semi_sql_codes): #形参spec_list是规格列表
     for i in spec_list:
         # print(i)
-        generate_product_spec_data(i,semi_sql_codes)
+        generate_product_spec_data(i,semi_sql_codes)  
 
 
-    sql_s1 = "create table 产品_配件_规格_总表 ( "
+    sql_s1 = "create table 产品_配件_规格_总表 ( "    
 
     sql_s = ""
     i = 0
     while i < len(spec_list):
         # print(spec_list[i])
         if i == 0:
-            sql_s = sql_s + "select * from 产品_配件_" + spec_list[i]
+            sql_s = sql_s + "select * from 产品_配件_" + spec_list[i]   
             i += 1
         else:
-            sql_s = sql_s + " union select * from 产品_配件_" + spec_list[i]
+            sql_s = sql_s + " union select * from 产品_配件_" + spec_list[i] 
             i += 1
     # print(sql_s)
 
@@ -143,8 +146,9 @@ def generate_data_union(spec_list,semi_sql_codes):
     print(s_sql)
 
     cur.execute("drop table if exists " + "产品_配件_规格_总表")
-    cur.execute(s_sql)
-	return 0
+    cur.execute(s_sql)   
+    return 0
+
 
 
 if __name__ == "__main__":
@@ -160,7 +164,12 @@ select 产品,规格,AiR飞行器,Mini飞行器,经纬飞行器,前后下感知�
 ,`3轴机械云台`,PayloadSDK云台,`1200万像素摄像头`,`2000万像素摄像头`,`4800万像素摄像头`,`30倍光学变焦传感器`,热成像传感器,激光测距 `10公里图传`,`12公里图传`,`15公里图传`
 ,遥控器,带屏遥控器,建模软件,航线规划软件,IP45防水
 ,`2200毫安电池`,`3500毫安电池`,`6000毫安电池`,充电器,双向充电管家
-,小电机,小电机,大电机,大桨叶,小桨叶,大桨叶保护罩,小桨叶保护罩,扩展卡扣,单肩包,工具包,探照灯,喊话器
+,小电机,小电机,大电机,大桨叶,小桨叶,大桨叶保护罩,小桨叶保护罩,扩展卡扣,单肩包,工具包,探照灯,喊话器       -- 调整一些投影字段的顺序，方便人看
 from 产品_配件_规格_总表
 order by 产品,规格
+#与Excel源数据比对 正确
 """
+
+###说明：如果 源Excel文件增加(也可以同一个文件中 保存多种商品的数据)，产品_配件_规格_总表 的行和列 都是可以自动增加的(即“产品-规格”与“配件种类”都是可自动增加的)
+###本模块的主要特点 是利用了Python的字符串处理能力，来拼接所需要的SQL代码
+###函数generate_product_spec_data是比较抽象的，因为抽象 所以有利于复用！函数generate_data_union体现了“分解问题 然后再合并子问题解”的思想：产品_规格-配件 放在一起出处理的话 很难行转列，所以 先固化一种规格 然后处理产品-配件的行转列，然后一次处理每一种规格，最后union合并！
