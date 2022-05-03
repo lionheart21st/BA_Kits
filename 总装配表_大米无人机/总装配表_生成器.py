@@ -15,7 +15,7 @@ db = pymysql.connect(
 )
 
 cur = db.cursor()
-engine = create_engine('mysql+pymysql://root:Coco123456!@localhost:3306/coco_test?charset=utf8')
+engine = create_engine('mysql+pymysql://root:@localhost:3306/coco_test?charset=utf8')
 
 
 
@@ -115,6 +115,7 @@ def generate_product_spec_data(spec,semi_sql_codes): #形参spec是specification
     # print(s_sql)
     cur.execute("drop table if exists " + "产品_配件_" + spec)
     cur.execute(s_sql)
+	return 0
 
 #生成不同规格的产品_配件表(如 产品_配件_标准版、产品_配件_畅飞版、产品_配件_至尊版),并且合并为 产品_配件_规格_总表
 def generate_data_union(spec_list,semi_sql_codes):
@@ -143,6 +144,7 @@ def generate_data_union(spec_list,semi_sql_codes):
 
     cur.execute("drop table if exists " + "产品_配件_规格_总表")
     cur.execute(s_sql)
+	return 0
 
 
 if __name__ == "__main__":
