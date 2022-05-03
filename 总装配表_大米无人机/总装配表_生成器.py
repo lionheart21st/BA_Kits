@@ -13,7 +13,7 @@ db = pymysql.connect(
     charset = 'utf8',
     database = ''
 )
-
+ 
 cur = db.cursor()
 engine = create_engine('mysql+pymysql://root:@localhost:3306/coco_test?charset=utf8')
 
